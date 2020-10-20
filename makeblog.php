@@ -1,7 +1,7 @@
-<?php $pageTitle = "index"; require("./template/head.php");?>
+<?php $pageTitle = "make blog"; require("./template/head.php");?>
 <?php require("./template/nav.php");?>
 <?php require("./template/msg.php");?>
 
-    <h1>index</h1>
+    <h1>make blog</h1>
 
 <?php require("./template/footer.php");?>

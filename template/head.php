@@ -12,4 +12,4 @@
     <title><?php echo $pageTitle ?></title>
 </head>
 
-<body>
+<body class="vw-100 vh-100">
