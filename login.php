@@ -27,7 +27,6 @@ require("./template/head.php"); ?>
                     <button type="submit" class="btn btn-primary w-100">Login</button>
                 </form>
                 <!-- form end -->
-                
             </div>
             <!-- card end -->
         </div>
