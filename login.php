@@ -8,12 +8,12 @@ require("./template/head.php"); ?>
         <!-- col1 start -->
         <div class="col d-flex justify-content-center w-50 h-100">
             <!-- card start -->
-            <div class="card align-self-center w-50 h-50 text-center">
+            <div class="card align-self-center w-50 text-center">
                 <div class="card-header">
                     Login
                 </div>
                 <!-- form start -->
-                <form class="w-75 align-self-center" method="POST" action="script/userLogin.php">
+                <form class="w-75 pb-2 align-self-center" method="POST" action="script/userLogin.php">
                     <!-- username form group -->
                     <div class="form-group">
                         <label for="loginUsername">Username</label>
@@ -34,12 +34,12 @@ require("./template/head.php"); ?>
         <!-- col2 start -->
         <div class="col d-flex justify-content-center w-50 h-100">
             <!-- card start -->
-            <div class="card align-self-center w-50 h-50 text-center">
+            <div class="card align-self-center w-50 text-center">
                 <div class="card-header">
                     Register
                 </div>
                 <!-- form start -->
-                <form class="w-75 align-self-center" method="POST" action="script/userRegister.php">
+                <form class="w-75 pb-2 align-self-center" method="POST" action="script/userRegister.php">
                     <!-- username form group -->
                     <div class="form-group">
                         <label for="registerUsername">Username</label>
