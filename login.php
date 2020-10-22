@@ -17,7 +17,7 @@ require("./template/head.php"); ?>
                     <!-- username form group -->
                     <div class="form-group">
                         <label for="loginUsername">Username</label>
-                        <input type="username" class="form-control" id="loginUsername" name="username" placeholder="Username" required>
+                        <input type="username" class="form-control" id="loginUsername" name="username" placeholder="Username" required autofocus>
                     </div>
                     <!-- password form group -->
                     <div class="form-group">
