@@ -6,8 +6,9 @@ require("./template/head.php"); ?>
 <!-- <h1>index</h1> -->
 
 <div class="container-fluid mt-3 d-flex flex-wrap justify-content-around w-100">
-
-    <div class="card m-2">
+    <!-- card start -->
+    <div class="card m-2 w-20">
+        <!-- card img -->
         <img src="img/temp.svg" alt="" class="card-img-top">
         <!-- card title -->
         <div class="card-header">ælaksd</div>
@@ -19,7 +20,7 @@ require("./template/head.php"); ?>
         </div>
         <div class="card-body border-top">
             <!-- card category list -->
-            <div class="d-inline-flex border rounded p-1">
+            <div class="d-inline-flex flex-wrap border rounded p-1">
                 <p class="m-0">test</p>
             </div>
             
@@ -31,7 +32,7 @@ require("./template/head.php"); ?>
             <p class="card-text">14:30 20-10-2020</p>
         </div>
     </div>
-
+    <!-- card end -->
 </div>
 
 <?php require("./template/footer.php"); ?>
