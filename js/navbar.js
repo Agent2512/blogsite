@@ -5,6 +5,5 @@ $(".nav-link").each((e) => {
 
     if (currentFile == navLink) {
         $($(".nav-link")[e]).addClass("border rounded bg-dark")
-        console.log($($(".nav-link")[e]));
     }
 });
