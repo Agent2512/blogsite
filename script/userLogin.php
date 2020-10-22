@@ -1,6 +1,4 @@
 <?php
-var_dump($_POST);
-
 require("../inc/inc.php");
 
 $mysql = new mysqlScripts();

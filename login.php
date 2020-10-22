@@ -2,6 +2,7 @@
 require("./template/head.php"); ?>
 <?php require("./template/nav.php"); ?>
 <?php require("./template/msg.php"); ?>
+
 <div class="w-100 h-90 container-fluid">
     <div class="row w-100 h-100">
         <!-- col1 start -->

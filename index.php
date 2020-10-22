@@ -3,8 +3,6 @@ require("./template/head.php"); ?>
 <?php require("./template/nav.php"); ?>
 <?php require("./template/msg.php"); ?>
 
-<!-- <h1>index</h1> -->
-
 <div class="container-fluid mt-3 d-flex flex-wrap justify-content-around w-100">
     <!-- card start -->
     <div class="card m-2 w-20">
