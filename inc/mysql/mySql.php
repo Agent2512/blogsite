@@ -2,7 +2,7 @@
 class mysql {
     private $conn;
     // constants a standard connection to database 
-    public function __construct($inputServerName = "localhost", $inputUserName = "root", $inputPassword = "", $inputDatabase = "login-department") {
+    public function __construct($inputServerName = "localhost", $inputUserName = "root", $inputPassword = "", $inputDatabase = "blogsite") {
         $this->conn = new mysqli($inputServerName, $inputUserName, $inputPassword, $inputDatabase);
 
         if ($this->conn->connect_error){
