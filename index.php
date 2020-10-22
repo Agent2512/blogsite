@@ -9,7 +9,7 @@ require("./template/head.php"); ?>
     <!-- card start -->
     <div class="card m-2 w-20">
         <!-- card img -->
-        <img src="img/temp.svg" alt="" class="card-img-top">
+        <img src="img/temp.svg" alt="" class="card-img-top img-fluid">
         <!-- card title -->
         <div class="card-header">ælaksd</div>
         <div class="card-body">
