@@ -16,4 +16,4 @@
     <title><?php echo $pageTitle ?></title>
 </head>
 
-<body class="w-100 h-100">
+<body class="vw-100 vh-100">
