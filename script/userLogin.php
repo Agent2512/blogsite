@@ -5,7 +5,7 @@ $mysql = new mysqlScripts();
 
 $allUsers = $mysql->getAllUsers();
 
-$username = $_POST["username"];
+$username = strtolower ($_POST["username"]);
 $password = $_POST["password"];
 
 for ($i=0; $i < count($allUsers); $i++) { 

@@ -4,7 +4,7 @@ require("../inc/inc.php");
 $mysql = new mysqlScripts();
 
 $email = $_POST["email"];
-$username = $_POST["username"];
+$username = strtolower($_POST["username"]);
 $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
 $allUsers = $mysql->getAllUsers();
