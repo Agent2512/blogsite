@@ -47,7 +47,7 @@ require("./template/head.php"); ?>
                     </div>
                     <!-- email form group -->
                     <div class="form-group">
-                        <label for="registerEmail">Username</label>
+                        <label for="registerEmail">Email</label>
                         <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Email" required>
                     </div>
                     <!-- password form group -->
