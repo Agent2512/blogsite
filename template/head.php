@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="css/main.css">
 
     <!-- title to page -->
+    <?php
+        if (!isset($pageTitle)) {
+            $pageTitle = "Blog Site";
+        }
+    ?>
     <title><?php echo $pageTitle ?></title>
 </head>
 
