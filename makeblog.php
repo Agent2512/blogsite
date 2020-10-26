@@ -31,35 +31,7 @@ if (!isset($_SESSION)) {
                     <input type="text" class="form-control" id="decoration" name="decoration" placeholder="Enter decoration" required>
                 </div>
                 <div class="form-group">
-                    <!-- dropdown start -->
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown button
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li class="form-check ml-2">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label" for="">test</label>
-                            </li>
-                            <li class="form-check ml-2">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label" for="">test</label>
-                            </li>
-                            <li class="form-check ml-2">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label" for="">test</label>
-                            </li>
-                            <li class="form-check ml-2">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label" for="">test</label>
-                            </li>
-                            <li class="form-check ml-2">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label" for="">test</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- dropdown end -->
+                    
                 </div>
             </form>
         </div>
