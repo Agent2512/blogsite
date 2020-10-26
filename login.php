@@ -40,15 +40,15 @@ require("./template/head.php"); ?>
                 </div>
                 <!-- form start -->
                 <form class="w-75 pb-2 align-self-center" method="POST" action="script/userRegister.php">
-                    <!-- username form group -->
-                    <div class="form-group">
-                        <label for="registerUsername">Username</label>
-                        <input type="username" class="form-control" id="registerUsername" name="username" placeholder="Username" required>
-                    </div>
                     <!-- email form group -->
                     <div class="form-group">
                         <label for="registerEmail">Email</label>
                         <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Email" required>
+                    </div>
+                    <!-- username form group -->
+                    <div class="form-group">
+                        <label for="registerUsername">Username</label>
+                        <input type="username" class="form-control" id="registerUsername" name="username" placeholder="Username" required>
                     </div>
                     <!-- password form group -->
                     <div class="form-group">
