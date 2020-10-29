@@ -27,11 +27,12 @@ if (!isset($_SESSION)) {
                     <input type="file" class="form-control" id="image" name="image">
                 </div>
                 <div class="form-group">
-                    <label for="title">decoration</label>
+                    <label for="title">decoration (max 50 caracteres)</label>
                     <input type="text" class="form-control" id="decoration" name="decoration" placeholder="Enter decoration" required>
                 </div>
                 <div class="form-group">
-                    
+                    <label for="title">text (max 500 caracteres)</label>
+                    <textarea  type="text" rows="6" class="form-control" id="decoration" name="decoration" placeholder="Enter text" required></textarea>
                 </div>
             </form>
         </div>
