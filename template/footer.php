@@ -5,6 +5,7 @@
 <!-- Optional JavaScript -->
 <script src="js/navbar.js"></script>
 <script src="js/msgbox.js"></script>
+<script src="js/dropdown.js"></script>
 </body>
 
 </html>

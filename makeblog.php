@@ -32,7 +32,36 @@ if (!isset($_SESSION)) {
                 </div>
                 <div class="form-group">
                     <label for="title">text (max 500 caracteres)</label>
-                    <textarea  type="text" rows="6" class="form-control" id="decoration" name="decoration" placeholder="Enter text" required></textarea>
+                    <textarea type="text" rows="6" class="form-control" id="decoration" name="decoration" placeholder="Enter text" required></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                        </button>
+                        <div class="dropdown-menu pl-2" aria-labelledby="dropdownMenuButton">
+                            <div>
+                                <input type="checkbox">
+                                <label for="">test</label>
+                            </div>
+                            <div>
+                                <input type="checkbox">
+                                <label for="">test</label>
+                            </div>
+                            <div>
+                                <input type="checkbox">
+                                <label for="">test</label>
+                            </div>
+                            <div>
+                                <input type="checkbox">
+                                <label for="">test</label>
+                            </div>
+                            <div>
+                                <input type="checkbox">
+                                <label for="">test</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
