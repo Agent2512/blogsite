@@ -16,11 +16,11 @@
                         <a class='nav-link' href='./makeblog.php'>make blog</a>
                     </li>
                     ";
-                    echo "
-                    <li class='nav-item active'>
-                        <a class='nav-link' href='./profile.php'>profile</a>
-                    </li>
-                    ";
+                    // echo "
+                    // <li class='nav-item active'>
+                    //     <a class='nav-link' href='./profile.php'>profile</a>
+                    // </li>
+                    // ";
                     echo "
                     <li class='nav-item active'>
                         <a class='nav-link' href='./script/userLogout.php'>logout</a>
