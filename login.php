@@ -1,6 +1,15 @@
 <?php $pageTitle = "login"; require("./template/head.php"); ?>
 <?php require("./template/nav.php"); ?>
 <?php require("./template/msg.php"); ?>
+<?php  
+require("inc/inc.php");
+
+if (isset($_POST['submit'])) {
+    $form_validator = new form_validator($_POST);
+
+}
+
+?>
 
 <div class="w-100 h-90 container-fluid">
     <div class="row w-100 h-100">
@@ -12,7 +21,7 @@
                     Login
                 </div>
                 <!-- form start -->
-                <form class="w-75 pb-2 align-self-center" method="POST" action="script/userLogin.php">
+                <form class="w-75 pb-2 align-self-center" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <!-- username form group -->
                     <div class="form-group">
                         <label for="loginUsername">Username</label>
@@ -38,7 +47,7 @@
                     Register
                 </div>
                 <!-- form start -->
-                <form class="w-75 pb-2 align-self-center" method="POST" action="script/userRegister.php">
+                <form class="w-75 pb-2 align-self-center" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <!-- email form group -->
                     <div class="form-group">
                         <label for="registerEmail">Email</label>
