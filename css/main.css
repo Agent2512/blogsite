@@ -8,6 +8,10 @@
 }
 
 /* width */
+.w-fit {
+    width: fit-content!important;
+}
+
 .w-10{
     width: 10%!important;
 }
