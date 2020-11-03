@@ -19,7 +19,7 @@ if (!isset($_SESSION)) {
         <div class="card-body">
             <form action="" method="post">
                 <div class="form-group">
-                    <label for="title">Title</label>
+                    <label for="title">Title (max 50 caracteres)</label>
                     <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
                 </div>
                 <div class="form-group">
@@ -27,7 +27,7 @@ if (!isset($_SESSION)) {
                     <input type="file" class="form-control" id="image" name="image">
                 </div>
                 <div class="form-group">
-                    <label for="title">decoration (max 50 caracteres)</label>
+                    <label for="decoration">decoration (max 50 caracteres)</label>
                     <input type="text" class="form-control" id="decoration" name="decoration" placeholder="Enter decoration" required>
                 </div>
                 <div class="form-group">
