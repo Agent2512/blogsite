@@ -17,7 +17,7 @@ if (!isset($_SESSION)) {
         <!-- card title -->
         <div class="card-header">create blog</div>
         <div class="card-body">
-            <form action="" method="post">
+            <form class="h-100" action="" method="post">
                 <div class="form-group">
                     <label for="title">Title (max 50 caracteres)</label>
                     <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
@@ -30,9 +30,9 @@ if (!isset($_SESSION)) {
                     <label for="decoration">decoration (max 50 caracteres)</label>
                     <input type="text" class="form-control" id="decoration" name="decoration" placeholder="Enter decoration" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group h-30">
                     <label for="title">text (max 500 caracteres)</label>
-                    <textarea type="text" rows="6" class="form-control" id="decoration" name="decoration" placeholder="Enter text" required></textarea>
+                    <textarea type="text" class="form-control h-90" id="decoration" name="decoration" placeholder="Enter text" required></textarea>
                 </div>
                 <div class="form-group">
                     <div class="dropdown">
