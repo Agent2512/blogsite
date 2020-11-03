@@ -1,5 +1,5 @@
 <?php
-class mysqlScripts extends mysql
+class db_functions extends db_connection
 {
     public function getAllUsers()
     {

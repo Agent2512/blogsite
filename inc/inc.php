@@ -1,4 +1,4 @@
 <?php
-// mysql
-require("mysql/mySql.php");
-require("mysql/mysqlScripts.php");
+// database
+require("db/db_connection.php");
+require("db/db_functions.php");

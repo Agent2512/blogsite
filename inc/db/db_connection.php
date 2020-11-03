@@ -1,5 +1,5 @@
 <?php
-class mysql {
+class db_connection {
     private $conn;
     // constants a standard connection to database 
     public function __construct($inputServerName = "localhost", $inputUserName = "root", $inputPassword = "", $inputDatabase = "blogsite") {

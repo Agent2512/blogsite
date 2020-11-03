@@ -1,9 +1,9 @@
 <?php
 require("../inc/inc.php");
 
-$mysql = new mysqlScripts();
+$db = new db_functions();
 
-$allUsers = $mysql->getAllUsers();
+$allUsers = $db->getAllUsers();
 
 $username = strtolower ($_POST["username"]);
 $password = $_POST["password"];
