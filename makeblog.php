@@ -63,6 +63,7 @@ if (!isset($_SESSION)) {
                         </div>
                     </div>
                 </div>
+                <input type="submit" class="btn btn-primary w-100" name="submit" value="Login">
             </form>
         </div>
     </div>

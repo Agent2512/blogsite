@@ -23,7 +23,7 @@
                         <label for="loginPassword">Password</label>
                         <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                    <input type="submit" class="btn btn-primary w-100" name="submit" value="Login">
                 </form>
                 <!-- form end -->
             </div>
@@ -54,7 +54,7 @@
                         <label for="registerPassword">Password</label>
                         <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">register</button>
+                    <input type="submit" class="btn btn-primary w-100" name="submit" value="register">
                 </form>
                 <!-- form end -->
             </div>
