@@ -3,14 +3,14 @@ class form_validator {
     private $data;
     private $errors = [];
     private $fields = [
-        "login" => [
-            "username",
-            "password"
+        "Login" => [
+            "usernameLogin",
+            "passwordLogin"
         ],
-        "register" => [
-            "username",
-            "password",
-            "email"
+        "Register" => [
+            "usernameRegister",
+            "passwordRegister",
+            "emailRegister"
         ]
     ];
 
@@ -21,7 +21,7 @@ class form_validator {
     public function validateForm($fieldKey){
         $fields = $this->fields[$fieldKey];
 
-        if ($fieldKey == "login") {
+        if ($fieldKey == "Login") {
             foreach($fields as $field) {
                 if (!array_key_exists($field, $this->data)) {
                     trigger_error("$field is not parent in data");
@@ -32,7 +32,7 @@ class form_validator {
             $this->validateUsername($fieldKey);
             $this->validatePassword($fieldKey);
         }
-        else if ($fieldKey == "register") {
+        else if ($fieldKey == "Register") {
             foreach($fields as $field) {
                 if (!array_key_exists($field, $this->data)) {
                     trigger_error("$field is not parent in data");
@@ -50,7 +50,7 @@ class form_validator {
 
     private function validateUsername(string $addErrorId = "")
     {
-        $val = trim($this->data['username']);
+        $val = trim($this->data["username$addErrorId"]); 
 
         if ($addErrorId != "") {
             $addErrorId = ucfirst($addErrorId);
@@ -67,7 +67,7 @@ class form_validator {
 
     private function validatePassword(string $addErrorId = "")
     {
-        $val = trim($this->data['password']);
+        $val = trim($this->data["password$addErrorId"]);
 
         if ($addErrorId != "") {
             $addErrorId = ucfirst($addErrorId);
@@ -84,7 +84,7 @@ class form_validator {
 
     private function validateEmail(string $addErrorId = "")
     {
-        $val = trim($this->data['email']);
+        $val = trim($this->data["email$addErrorId"]);
 
         if ($addErrorId != "") {
             $addErrorId = ucfirst($addErrorId);
