@@ -76,7 +76,7 @@ class form_validator {
         if (empty($val)) {
             $this->addError("password$addErrorId", "password cannot be empty");
         } else {
-            if (strlen($val >= 8)) {
+            if (strlen($val) <= 7) {
                 $this->addError("password$addErrorId", "password must be 8 char or more");
             }
         }
