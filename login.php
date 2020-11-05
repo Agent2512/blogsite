@@ -6,7 +6,7 @@ require("inc/inc.php");
 
 if (isset($_POST['submit'])) {
     $form_validator = new form_validator($_POST);
-
+    $errors = $form_validator->validateForm($_POST["submit"]);
 }
 
 ?>
@@ -26,13 +26,38 @@ if (isset($_POST['submit'])) {
                     <div class="form-group">
                         <label for="loginUsername">Username</label>
                         <input type="username" class="form-control" id="loginUsername" name="username" placeholder="Username" required autofocus>
+                        <?php
+                            // error box
+                            if (isset($errors["usernameLogin"])) {
+                                $tempError = $errors["usernameLogin"];
+                                echo "
+                                <div class='mt-2 mx-auto py-1 px-3 bg-danger border rounded text-white w-fit'>
+                                    ".$tempError."
+                                </div>
+                                ";
+                            }
+                        ?>
                     </div>
                     <!-- password form group -->
                     <div class="form-group">
                         <label for="loginPassword">Password</label>
                         <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password" required>
+                        <?php
+                            // error box
+                            if (isset($errors["passwordLogin"])) {
+                                $tempError = $errors["passwordLogin"];
+
+                                echo "
+                                <div class='mt-2 mx-auto py-1 px-3 bg-danger border rounded text-white w-fit'>
+                                    ".$tempError."
+                                </div>
+                                ";
+                            }
+                        ?>
                     </div>
-                    <input type="submit" class="btn btn-primary w-100" name="submit" value="Login">
+                        
+                    
+                    <input type="submit" class="btn btn-primary w-100 my-3" name="submit" value="login">
                 </form>
                 <!-- form end -->
             </div>
@@ -52,18 +77,54 @@ if (isset($_POST['submit'])) {
                     <div class="form-group">
                         <label for="registerEmail">Email</label>
                         <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Email" required>
+                        <?php
+                            // error box
+                            if (isset($errors["emailRegister"])) {
+                                $tempError = $errors["emailRegister"];
+
+                                echo "
+                                <div class='mt-2 mx-auto py-1 px-3 bg-danger border rounded text-white w-fit'>
+                                    ".$tempError."
+                                </div>
+                                ";
+                            }
+                        ?>
                     </div>
                     <!-- username form group -->
                     <div class="form-group">
                         <label for="registerUsername">Username</label>
                         <input type="username" class="form-control" id="registerUsername" name="username" placeholder="Username" required>
+                        <?php
+                            // error box
+                            if (isset($errors["usernameRegister"])) {
+                                $tempError = $errors["usernameRegister"];
+
+                                echo "
+                                <div class='mt-2 mx-auto py-1 px-3 bg-danger border rounded text-white w-fit'>
+                                    ".$tempError."
+                                </div>
+                                ";
+                            }
+                        ?>
                     </div>
                     <!-- password form group -->
                     <div class="form-group">
                         <label for="registerPassword">Password</label>
                         <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Password" required>
+                        <?php
+                            // error box
+                            if (isset($errors["passwordRegister"])) {
+                                $tempError = $errors["passwordRegister"];
+
+                                echo "
+                                <div class='mt-2 mx-auto py-1 px-3 bg-danger border rounded text-white w-fit'>
+                                    ".$tempError."
+                                </div>
+                                ";
+                            }
+                        ?>
                     </div>
-                    <input type="submit" class="btn btn-primary w-100" name="submit" value="register">
+                    <input type="submit" class="btn btn-primary w-100 my-3" name="submit" value="register">
                 </form>
                 <!-- form end -->
             </div>
