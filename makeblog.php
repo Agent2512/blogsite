@@ -31,8 +31,8 @@ if (!isset($_SESSION)) {
                     <input type="text" class="form-control" id="decoration" name="decoration" placeholder="Enter decoration" required>
                 </div>
                 <div class="form-group h-30">
-                    <label for="title">text (max 500 caracteres)</label>
-                    <textarea type="text" class="form-control h-90" id="decoration" name="decoration" placeholder="Enter text" required></textarea>
+                    <label for="text">text (max 500 caracteres)</label>
+                    <textarea type="text" class="form-control h-90" id="text" name="text" placeholder="Enter text" required></textarea>
                 </div>
                 <div class="form-group">
                     <div class="dropdown">
