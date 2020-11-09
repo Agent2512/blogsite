@@ -1,13 +1,48 @@
-<?php require("./script/userLoginCheck.php"); ?>
-
-<?php $pageTitle = "make blog";
-require("./template/head.php"); ?>
-<?php require("./template/nav.php"); ?>
-<?php require("./template/msg.php"); ?>
-
 <?php
-if (!isset($_SESSION)) {
-    session_start();
+require("./script/userLoginCheck.php");
+require("./inc/inc.php");
+
+$pageTitle = "make blog";
+require("./template/head.php");
+
+require("./template/nav.php");
+require("./template/msg.php");
+
+$db = new db_functions();
+$allCategories = array_column($db->getAllCategories(), "name");
+
+$allInputsElements = [];
+
+for ($i = 0; $i < count($allCategories); $i++) {
+    $category = $allCategories[$i];
+    $e = "
+    <div class='category'>
+        <input name='Categories[$category]' type='checkbox'>
+        <label>$category</label>
+    </div>
+    ";
+    array_push($allInputsElements, $e);
+}
+
+$allInputRows = [];
+
+for ($i = 0; $i < count($allInputsElements); $i += 5) {
+    $f1 = $allInputsElements[$i + 0] ?? "";
+    $f2 = $allInputsElements[$i + 1] ?? "";
+    $f3 = $allInputsElements[$i + 2] ?? "";
+    $f4 = $allInputsElements[$i + 3] ?? "";
+    $f5 = $allInputsElements[$i + 4] ?? "";
+
+    $e = "
+    <div class='mr-2'>
+        $f1
+        $f2
+        $f3
+        $f4
+        $f5
+    </div>
+    ";
+    array_push($allInputRows, $e);
 }
 ?>
 
@@ -17,14 +52,14 @@ if (!isset($_SESSION)) {
         <!-- card title -->
         <div class="card-header">create blog</div>
         <div class="card-body">
-            <form class="h-100" action="" method="post">
+            <form class="h-100" action="test.php" method="post">
                 <div class="form-group">
                     <label for="title">Title (max 50 caracteres)</label>
                     <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
                 </div>
                 <div class="form-group">
                     <label for="image">Image</label>
-                    <input type="file" class="form-control" id="image" name="image">
+                    <input type="file" class="form-control" id="image" name="image" accept=".jpg, .png">
                 </div>
                 <div class="form-group">
                     <label for="decoration">decoration (max 50 caracteres)</label>
@@ -40,30 +75,17 @@ if (!isset($_SESSION)) {
                             Categories
                         </button>
                         <div class="dropdown-menu pl-2" aria-labelledby="dropdownMenuButton">
-                            <div>
-                                <input type="checkbox">
-                                <label for="">test</label>
-                            </div>
-                            <div>
-                                <input type="checkbox">
-                                <label for="">test</label>
-                            </div>
-                            <div>
-                                <input type="checkbox">
-                                <label for="">test</label>
-                            </div>
-                            <div>
-                                <input type="checkbox">
-                                <label for="">test</label>
-                            </div>
-                            <div>
-                                <input type="checkbox">
-                                <label for="">test</label>
+                            <div class="d-flex">
+                                <?php
+                                for ($i = 0; $i < count($allInputRows); $i++) {
+                                    echo $allInputRows[$i];
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-primary w-100" name="submit" value="Login">
+                <input type="submit" class="btn btn-primary w-100" name="submit" value="submitBlog">
             </form>
         </div>
     </div>

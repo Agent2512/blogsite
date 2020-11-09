@@ -14,4 +14,11 @@ class db_functions extends db_connection
         INSERT INTO `login` (`id`, `username`, `password`, `email`) VALUES (NULL, '$username', '$password', '$email');
         ");
     }
+
+    // 
+
+    public function getAllCategories()
+    {
+        return $this->getData("SELECT * FROM `categories`");
+    }
 }
