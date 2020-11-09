@@ -11,6 +11,13 @@ class form_validator {
             "usernameRegister",
             "passwordRegister",
             "emailRegister"
+        ],
+        "submitBlog" => [
+            "title",
+            "decoration",
+            "text",
+            "category" => ""
+
         ]
     ];
 
@@ -43,6 +50,16 @@ class form_validator {
             $this->validateUsername($fieldKey);
             $this->validatePassword($fieldKey);
             $this->validateEmail($fieldKey);
+        }
+        else if ($fieldKey == "submitBlog") {
+            foreach($fields as $field) {
+                if (!array_key_exists($field, $this->data)) {
+                    trigger_error("$field is not parent in data");
+                    return;
+                }
+            }
+
+            
         }
 
         return $this->errors;
