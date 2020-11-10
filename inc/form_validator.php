@@ -15,7 +15,6 @@ class form_validator
         ],
         "submitBlog" => [
             "title",
-            "image",
             "decoration",
             "text"
         ]
@@ -128,18 +127,6 @@ class form_validator
             else {
                 if ($field == "title" && strlen($val) >= 50) {
                     $this->addError($field."Error", "$field is max 50");
-                }
-                else if ($field == "image") {
-                    if (strpos($val, ".png") != false) {
-                        $val = str_replace(".png", "", $val);
-                    }
-                    else if (strpos($val, ".jpg") != false) {
-                        $val = str_replace(".jpg", "", $val);
-                    }
-
-                    if (empty($val)) {
-                        $this->addError($field."Error", "$field name cannot be empty");
-                    }
                 }
                 else if($field == "decoration" && strlen($val) >= 50) {
                     $this->addError($field."Error", "$field is max 50");
