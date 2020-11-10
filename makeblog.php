@@ -35,15 +35,20 @@ for ($i = 0; $i < count($allInputsElements); $i += 5) {
 
     $e = "
     <div class='mr-2'>
-        $f1
-        $f2
-        $f3
-        $f4
-        $f5
+        $f1 $f2 $f3 $f4 $f5
     </div>
     ";
     array_push($allInputRows, $e);
 }
+
+if (isset($_POST["submit"])) {
+    $form_validator = new form_validator($_POST);
+    $errors = $form_validator->validateForm($_POST["submit"]);
+
+    
+}
+
+
 ?>
 
 <div class="container-fluid w-100 h-90 d-flex">
@@ -52,22 +57,66 @@ for ($i = 0; $i < count($allInputsElements); $i += 5) {
         <!-- card title -->
         <div class="card-header">create blog</div>
         <div class="card-body">
-            <form class="h-100" action="test.php" method="post">
+            <form class="h-100" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <div class="form-group">
-                    <label for="title">Title (max 50 caracteres)</label>
+                    <label for="title">Title (max 50 characters)</label>
                     <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
+                    <?php
+                    // error box
+                    if (isset($errors["titleError"])) {
+                        $tempError = $errors["titleError"];
+                        echo "
+                            <div class='mt-2 py-1 px-3 bg-danger border rounded text-white w-fit'>
+                                " . $tempError . "
+                            </div>
+                            ";
+                    }
+                    ?>
                 </div>
                 <div class="form-group">
                     <label for="image">Image</label>
-                    <input type="file" class="form-control" id="image" name="image" accept=".jpg, .png">
+                    <input type="file" class="form-control" id="image" name="image" accept=".jpg, .png" required>
+                    <?php
+                    // error box
+                    if (isset($errors["imageError"])) {
+                        $tempError = $errors["imageError"];
+                        echo "
+                            <div class='mt-2 py-1 px-3 bg-danger border rounded text-white w-fit'>
+                                " . $tempError . "
+                            </div>
+                            ";
+                    }
+                    ?>
                 </div>
                 <div class="form-group">
-                    <label for="decoration">decoration (max 50 caracteres)</label>
+                    <label for="decoration">decoration (max 50 characters)</label>
                     <input type="text" class="form-control" id="decoration" name="decoration" placeholder="Enter decoration" required>
+                    <?php
+                    // error box
+                    if (isset($errors["decorationError"])) {
+                        $tempError = $errors["decorationError"];
+                        echo "
+                            <div class='mt-2 py-1 px-3 bg-danger border rounded text-white w-fit'>
+                                " . $tempError . "
+                            </div>
+                            ";
+                    }
+                    ?>
                 </div>
-                <div class="form-group h-30">
-                    <label for="text">text (max 500 caracteres)</label>
-                    <textarea type="text" class="form-control h-90" id="text" name="text" placeholder="Enter text" required></textarea>
+                <div class="form-group h-40">
+                    <label for="text">text (max 500 characters)</label>
+                    <textarea type="text" class="form-control h-75" id="text" name="text" placeholder="Enter text" required></textarea>
+                    <?php
+                    // error box
+                    if (isset($errors["textError"])) {
+                        $tempError = $errors["textError"];
+                        echo "
+                            <div class='mt-2 py-1 px-3 bg-danger border rounded text-white w-fit'>
+                                " . $tempError . "
+                            </div>
+                            ";
+                    }
+                    ?>
                 </div>
                 <div class="form-group">
                     <div class="dropdown">

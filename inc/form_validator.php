@@ -1,5 +1,6 @@
 <?php
-class form_validator {
+class form_validator
+{
     private $data;
     private $errors = [];
     private $fields = [
@@ -14,22 +15,24 @@ class form_validator {
         ],
         "submitBlog" => [
             "title",
+            "image",
             "decoration",
-            "text",
-            "category" => ""
-
+            "text"
         ]
     ];
 
-    public function __construct($post_data){
+    public function __construct($post_data)
+    {
         $this->data = $post_data;
     }
 
-    public function validateForm($fieldKey){
+    public function validateForm($fieldKey)
+    {
         $fields = $this->fields[$fieldKey];
+        
 
         if ($fieldKey == "Login") {
-            foreach($fields as $field) {
+            foreach ($fields as $field) {
                 if (!array_key_exists($field, $this->data)) {
                     trigger_error("$field is not parent in data");
                     return;
@@ -38,9 +41,8 @@ class form_validator {
 
             $this->validateUsername($fieldKey);
             $this->validatePassword($fieldKey);
-        }
-        else if ($fieldKey == "Register") {
-            foreach($fields as $field) {
+        } else if ($fieldKey == "Register") {
+            foreach ($fields as $field) {
                 if (!array_key_exists($field, $this->data)) {
                     trigger_error("$field is not parent in data");
                     return;
@@ -50,16 +52,15 @@ class form_validator {
             $this->validateUsername($fieldKey);
             $this->validatePassword($fieldKey);
             $this->validateEmail($fieldKey);
-        }
-        else if ($fieldKey == "submitBlog") {
-            foreach($fields as $field) {
+        } else if ($fieldKey == "submitBlog") {
+            foreach ($fields as $field) {
                 if (!array_key_exists($field, $this->data)) {
                     trigger_error("$field is not parent in data");
                     return;
                 }
             }
 
-            
+            $this->validateBlog($fields);
         }
 
         return $this->errors;
@@ -67,7 +68,7 @@ class form_validator {
 
     private function validateUsername(string $addErrorId = "")
     {
-        $val = trim($this->data["username$addErrorId"]); 
+        $val = trim($this->data["username$addErrorId"]);
 
         if ($addErrorId != "") {
             $addErrorId = ucfirst($addErrorId);
@@ -114,6 +115,41 @@ class form_validator {
                 $this->addError("email$addErrorId", "email must be a valid email");
             }
         }
+    }
+
+    private function validateBlog($fields)
+    {
+        foreach($fields as $field) {
+            $val = trim($this->data[$field]);
+            
+            if (empty($val)) {
+                $this->addError($field."Error", "$field cannot be empty");
+            }
+            else {
+                if ($field == "title" && strlen($val) >= 50) {
+                    $this->addError($field."Error", "$field is max 50");
+                }
+                else if ($field == "image") {
+                    if (strpos($val, ".png") != false) {
+                        $val = str_replace(".png", "", $val);
+                    }
+                    else if (strpos($val, ".jpg") != false) {
+                        $val = str_replace(".jpg", "", $val);
+                    }
+
+                    if (empty($val)) {
+                        $this->addError($field."Error", "$field name cannot be empty");
+                    }
+                }
+                else if($field == "decoration" && strlen($val) >= 50) {
+                    $this->addError($field."Error", "$field is max 50");
+                }
+                else if($field == "text" && strlen($val) >= 500) {
+                    $this->addError($field."Error", "$field is max 500");
+                }
+            }
+        }
+
     }
 
     private function addError($key, $val)
