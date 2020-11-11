@@ -28,7 +28,7 @@ class user_control {
 
     private function login()
     {
-        $username = $this->data["usernameLogin"];
+        $username = strtolower($this->data["usernameLogin"]);
         $password =  $this->data["passwordLogin"];
 
         $allUsers = $this->db->getAllUsers();
@@ -53,7 +53,7 @@ class user_control {
     private function register()
     {
         $email = $this->data["emailRegister"];
-        $username = $this->data["usernameRegister"];
+        $username = strtolower($this->data["usernameRegister"]);
         $password = password_hash($this->data["passwordRegister"], PASSWORD_DEFAULT);
 
         $allUsers = $this->db->getAllUsers();
