@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
 
                 $_POST = array();
             } else if ($_POST["submit"] == "Login") {
-                header("Location: index.php?msg=you are not logged in");
+                header("Location: index.php?msg=you are logged in");
             }
         }
     }
