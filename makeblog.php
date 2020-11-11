@@ -17,7 +17,7 @@ for ($i = 0; $i < count($allCategories); $i++) {
     $category = $allCategories[$i];
     $e = "
     <div class='category'>
-        <input name='Categories[$category]' type='checkbox'>
+        <input name='categories[$category]' value='$category' type='checkbox'>
         <label>$category</label>
     </div>
     ";
@@ -45,7 +45,9 @@ if (isset($_POST["submit"])) {
     $form_validator = new form_validator($_POST);
     $errors = $form_validator->validateForm($_POST["submit"]);
 
-    
+    if (count($errors) == 0) {
+        $db->makeBlog($_SESSION["username"], $_POST, $_FILES);
+    }
 }
 
 
@@ -57,7 +59,7 @@ if (isset($_POST["submit"])) {
         <!-- card title -->
         <div class="card-header">create blog</div>
         <div class="card-body">
-            <form class="h-100" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <form class="h-100" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Title (max 50 characters)</label>
                     <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
