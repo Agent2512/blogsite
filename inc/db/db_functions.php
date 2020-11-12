@@ -20,7 +20,7 @@ class db_functions extends db_connection
     {
         return $this->getData("SELECT id  FROM `login` WHERE username = '$username'")[0]['id'];
     }
-    // Categories
+    // Categories_control
 
     public function getAllCategories()
     {
@@ -37,12 +37,61 @@ class db_functions extends db_connection
         $this->createData("INSERT INTO `blogs_has_categories` (`id`, `blogId`, `categoryId`) VALUES (NULL, '$blogId', '$categoryId')");
     }
 
+    public function getAllCategoriesToBlog(string $blogId)
+    {
+        return array_column($this->getData("
+        SELECT categories.name
+        FROM `blogs_has_categories`
+        INNER JOIN categories on categories.id = blogs_has_categories.categoryId
+        WHERE blogs_has_categories.blogId = $blogId
+        "),"name");
+    }
+    // file_control
+    private function getAllUploadImageNames(string $target = "./img/uploads/")
+    {
+        $dir = scandir($target);
+        unset($dir[0]);
+        unset($dir[1]);
+        $dir = array_values($dir);
+
+        for ($i = 0; $i < count($dir); $i++) {
+            $dir[$i] = explode(".", $dir[$i])[0];
+        }
+
+        return $dir;
+    }
+
+    private function uploadImage($fileLocation, $fileName, $fileDestination = "./img/uploads/")
+    {
+        move_uploaded_file($fileLocation, $fileDestination . $fileName);
+    }
+
     // blog_control
-    public function getBlogData(string $title, string $username)
+    public function getBlogOneData(string $title, string $username)
     {
         $userId = $this->getUserId($username);
 
         return $this->getData("SELECT * FROM `blogs` WHERE user_id = '$userId' && title = '$title'")[0];
+    }
+
+    public function getAllBlogs()
+    {
+        return $this->getData("
+        SELECT blogs.id, blogs.title, blogs.decoration, blogs.text, blogs.Image, blogs.timestamp, login.username
+        FROM `blogs`
+        INNER JOIN login on login.id = blogs.user_id
+        ");
+    }
+    public function getAllBlogImageNames()
+    {
+        $data = $this->getData("SELECT Image FROM `blogs`");
+        $data = array_column($data, "Image");
+
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i] = explode(".", $data[$i])[0];
+        }
+
+        return  $data;
     }
 
     public function makeBlog(string $username, array $post_data, array $image_data)
@@ -52,17 +101,30 @@ class db_functions extends db_connection
         $decoration = $post_data["decoration"];
         $text = $post_data["text"];
         $categories = $post_data["categories"] ?? [];
-        $imageName = $image_data["image"]["name"];
 
+        $new_file = $image_data["image"];
+        $new_file_name = explode(".", $new_file["name"])[0];
+        $new_file_extension = "." . explode(".", $new_file["name"])[1];
+
+        $i = 0;
+        while (in_array($new_file_name, $this->getAllUploadImageNames())) {
+            if (in_array($new_file_name . $i, $this->getAllUploadImageNames()) == false) {
+                $new_file_name = $new_file_name . $i;
+
+                break;
+            }
+            $i++;
+        }
+        $image = $new_file_name . $new_file_extension;
 
         $x1 = $this->createData("
         INSERT INTO `blogs` (`id`, `title`, `decoration`, `text`, `Image`, `user_id`, `timestamp`)
-        VALUES (NULL, '$title', '$decoration', '$text', '$imageName', '$userId', current_timestamp());
+        VALUES (NULL, '$title', '$decoration', '$text', '$image', '$userId', current_timestamp());
         ");
 
 
         if (count($categories) != 0 && $x1 == true) {
-            $blog = $this->getBlogData($title, $username);
+            $blog = $this->getBlogOneData($title, $username);
             $blogId = $blog["id"];
 
             foreach ($categories as $category) {
@@ -71,5 +133,20 @@ class db_functions extends db_connection
                 $this->addCategoryToBlog($blogId, $categoryId);
             }
         }
+
+        if ($x1 == true) {
+            $this->uploadImage($new_file["tmp_name"], $image);
+        }
+
+        $array1 = $this->getAllBlogImageNames();
+        $array2 = $this->getAllUploadImageNames();
+        $result = array_diff($array1, $array2);
+        // var_dump($result);
+
+        print_r("<pre>");
+        print_r($array1);
+        print_r($array2);
+        print_r($result);
+        print_r("</pre>");
     }
 }
