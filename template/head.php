@@ -16,4 +16,4 @@
     <title><?php echo $pageTitle ?? "Blog site" ?></title>
 </head>
 
-<body class="vw-100 vh-100">
+<body class="w-100 h-100">
