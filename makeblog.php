@@ -47,6 +47,7 @@ if (isset($_POST["submit"])) {
 
     if (count($errors) == 0) {
         $db->makeBlog($_SESSION["username"], $_POST, $_FILES);
+        header("Location: ./index.php");
     }
 }
 
