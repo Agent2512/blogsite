@@ -94,6 +94,16 @@ class db_functions extends db_connection
         return  $data;
     }
 
+    public function getBlogById(string $blogId)
+    {
+        return $this->getData("
+        SELECT blogs.id, blogs.title, blogs.decoration, blogs.text, blogs.Image, login.username, blogs.timestamp
+        FROM `blogs`
+        INNER JOIN login ON login.id = blogs.user_id
+        WHERE blogs.id = '$blogId'
+        ")[0];
+    }
+
     public function makeBlog(string $username, array $post_data, array $image_data)
     {
         $userId = $this->getUserId($username);
@@ -143,10 +153,10 @@ class db_functions extends db_connection
         $result = array_diff($array1, $array2);
         // var_dump($result);
 
-        print_r("<pre>");
-        print_r($array1);
-        print_r($array2);
-        print_r($result);
-        print_r("</pre>");
+        // print_r("<pre>");
+        // print_r($array1);
+        // print_r($array2);
+        // print_r($result);
+        // print_r("</pre>");
     }
 }
