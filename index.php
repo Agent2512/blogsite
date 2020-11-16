@@ -7,6 +7,7 @@ require("./template/msg.php");
 require("./inc/inc.php");
 $db = new db_functions();
 $allBlogData = $db->getAllBlogs();
+// echo count($allBlogData) . "<br>";
 // print_r("<pre>");
 // print_r($allBlogData);
 // print_r("</pre>");
@@ -21,14 +22,14 @@ for ($i=0; $i < count($allBlogData); $i++) {
     $timestamp = date("h:i d/m/Y",strtotime($allBlogData[$i]['timestamp']));
     $username = $allBlogData[$i]['username'];
 
-    $Categories = $db->getAllCategoriesToBlog($id);
+    $categories = $db->getAllCategoriesToBlog($id);
 
     $categoryElement = "";
 
-    for ($i=0; $i < count($Categories); $i++) { 
+    for ($j=0; $j < count($categories); $j++) { 
         $categoryElement .= "
         <div class='d-inline-flex flex-wrap border rounded p-1'>
-            <p class='m-0'>$Categories[$i]</p>
+            <p class='m-0'>$categories[$j]</p>
         </div>
         ";
     }
@@ -43,7 +44,7 @@ for ($i=0; $i < count($allBlogData); $i++) {
             <!-- card text -->
             <p class='card-text'>$decoration</p>
             <!-- card btn to card main page -->
-            <a href='#' class='btn btn-primary w-100'>Go somewhere</a>
+            <a href='./blog.php?id=$id' class='btn btn-primary w-100'>Go to blog</a>
         </div>
         <div class='card-body border-top'>
             <!-- card category list -->
