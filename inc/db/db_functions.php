@@ -39,14 +39,37 @@ class db_functions extends db_connection
 
     public function getAllCategoriesToBlog(string $blogId)
     {
-        return array_column($this->getData("
+        $x = $this->getData("
         SELECT categories.name
         FROM `blogs_has_categories`
         INNER JOIN categories on categories.id = blogs_has_categories.categoryId
         WHERE blogs_has_categories.blogId = $blogId
-        "),"name");
+        ");
+
+        if ($x == false) {
+            return $x;
+        }
+        else {
+            return array_column($x, "name");
+        }
     }
     // file_control
+    public function deleteUnusedFiles()
+    {
+        $base = array_column($this->getData("SELECT Image FROM `blogs`"),"Image");
+
+        $local = scandir("./img/uploads/");
+        unset($local[0]);
+        unset($local[1]);
+        $local = array_values($local);
+
+        $result = array_values(array_diff($local, $base));
+
+        for ($i=0; $i < count($result); $i++) { 
+            unlink("./img/uploads/$result[$i]");
+        }
+    }
+    
     private function getAllUploadImageNames(string $target = "./img/uploads/")
     {
         $dir = scandir($target);
@@ -96,12 +119,19 @@ class db_functions extends db_connection
 
     public function getBlogById(string $blogId)
     {
-        return $this->getData("
+        $x = $this->getData("
         SELECT blogs.id, blogs.title, blogs.decoration, blogs.text, blogs.Image, login.username, blogs.timestamp
         FROM `blogs`
         INNER JOIN login ON login.id = blogs.user_id
         WHERE blogs.id = '$blogId'
-        ")[0];
+        ");
+
+        if ($x == false) {
+            return $x;
+        }
+        else {
+            return $x[0];
+        }
     }
 
     public function makeBlog(string $username, array $post_data, array $image_data)
@@ -146,17 +176,8 @@ class db_functions extends db_connection
 
         if ($x1 == true) {
             $this->uploadImage($new_file["tmp_name"], $image);
+
+            $this->deleteUnusedFiles();
         }
-
-        $array1 = $this->getAllBlogImageNames();
-        $array2 = $this->getAllUploadImageNames();
-        $result = array_diff($array1, $array2);
-        // var_dump($result);
-
-        // print_r("<pre>");
-        // print_r($array1);
-        // print_r($array2);
-        // print_r($result);
-        // print_r("</pre>");
     }
 }
