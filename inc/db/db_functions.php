@@ -90,6 +90,11 @@ class db_functions extends db_connection
     }
 
     // blog_control
+    public function deleteBlogByID(string $id)
+    {
+        $this->deleteData("DELETE FROM `blogs` WHERE id = '$id'");
+    }
+
     public function getBlogOneData(string $title, string $username)
     {
         $userId = $this->getUserId($username);
