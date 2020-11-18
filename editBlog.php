@@ -38,9 +38,11 @@ for ($i = 0; $i < count($allCategories); $i++) {
 
     $checked = "";
 
-    for ($j=0; $j < count($blogCategories); $j++) { 
-        if ($blogCategories[$j] == $category) {
-            $checked = "checked";
+    if ($blogCategories != false) {
+        for ($j=0; $j < count($blogCategories); $j++) { 
+            if ($blogCategories[$j] == $category) {
+                $checked = "checked";
+            }
         }
     }
 
@@ -75,8 +77,7 @@ if (isset($_POST["submit"])) {
     $errors = $form_validator->validateForm($_POST["submit"]);
 
     if (count($errors) == 0) {
-        // $db->deleteBlogByID($_GET["blog"]);
-        // $db->makeBlog($_SESSION["username"], $_POST, $_FILES);
+        $db->editBlog($_GET["blog"], $_POST, $_FILES);
         header("Location: ./index.php");
     }
 }
