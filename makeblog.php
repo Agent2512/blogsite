@@ -9,7 +9,7 @@ require("./template/nav.php");
 require("./template/msg.php");
 
 $db = new db_functions();
-$allCategories = array_column($db->getAllCategories(), "name");
+$allCategories = $db->getAllCategories();
 
 $allInputsElements = [];
 
