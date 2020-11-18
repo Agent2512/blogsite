@@ -24,7 +24,14 @@ class db_functions extends db_connection
 
     public function getAllCategories()
     {
-        return $this->getData("SELECT * FROM `categories`");
+        $x = $this->getData("SELECT * FROM `categories`");
+
+        if ($x == false) {
+            return $x;
+        }
+        else {
+            return array_column($x, "name");
+        }
     }
 
     public function getCategoryID(string $categoryName)
