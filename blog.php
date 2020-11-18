@@ -11,15 +11,13 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+$blog;
+$categoryElement;
+
 if (isset($_POST["id"]) && !empty($_POST["id"] && isset($_POST["btn"]) && !empty($_POST["btn"]))) {
     $key = $_POST["btn"];
     $id = $_POST["id"];
     $xBlog = $db->getBlogById($id);
-
-    print_r("<pre>");
-    print_r($_POST);
-    print_r("</pre>");
-
 
     if ($xBlog["username"] == $_SESSION["username"]) {
         if ($key == "delete") {
@@ -31,11 +29,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"] && isset($_POST["btn"]) && !empty
         }
     }
 } 
-
-$blog;
-$categoryElement;
-
-if (isset($_GET["id"]) && !empty($_GET["id"])) {
+else if (isset($_GET["id"]) && !empty($_GET["id"]) && $db->getBlogById($_GET["id"]) != false) {
     $blog = $db->getBlogById($_GET["id"]);
     $categories = $db->getAllCategoriesToBlog($_GET["id"]);
 
@@ -52,7 +46,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     }
 } 
 else {
-    // header("Location: ./index.php");
+    header("Location: ./index.php");
 }
 
 ?>
@@ -67,7 +61,7 @@ else {
                 <?php echo $blog["title"] ?>
             </div>
             <?php
-            if ($_SESSION["username"] == $blog["username"]) {
+            if (isset($_SESSION["username"]) && $_SESSION["username"] == $blog["username"]) {
                 echo "
                 <form method='post' action='".$_SERVER['PHP_SELF']."' class='w-25 h-100 justify-content-around d-flex'>
                     <input type='submit' name='btn' class='btn btn-primary' value='edit'>
