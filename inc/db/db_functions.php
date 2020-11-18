@@ -21,6 +21,12 @@ class db_functions extends db_connection
         return $this->getData("SELECT id  FROM `login` WHERE username = '$username'")[0]['id'];
     }
     // Categories_control
+    public function deleteAllCategoriesToBlog(string $blogId)
+    {
+        $this->deleteData("
+        DELETE FROM `blogs_has_categories` WHERE blogId = '$blogId'
+        ");
+    }
 
     public function getAllCategories()
     {
@@ -95,6 +101,8 @@ class db_functions extends db_connection
     {
         move_uploaded_file($fileLocation, $fileDestination . $fileName);
     }
+    // comments
+    
 
     // blog_control
     public function deleteBlogByID(string $id)
@@ -179,6 +187,51 @@ class db_functions extends db_connection
             $blog = $this->getBlogOneData($title, $username);
             $blogId = $blog["id"];
 
+            foreach ($categories as $category) {
+                $categoryId = $this->getCategoryId($category);
+
+                $this->addCategoryToBlog($blogId, $categoryId);
+            }
+        }
+
+        if ($x1 == true) {
+            $this->uploadImage($new_file["tmp_name"], $image);
+
+            $this->deleteUnusedFiles();
+        }
+    }
+
+    public function editBlog(string $blogId, array $post_data, array $image_data)
+    {
+        $title = $post_data["title"];
+        $decoration = $post_data["decoration"];
+        $text = $post_data["text"];
+        $categories = $post_data["categories"] ?? [];
+
+        $new_file = $image_data["image"];
+        $new_file_name = explode(".", $new_file["name"])[0];
+        $new_file_extension = "." . explode(".", $new_file["name"])[1];
+
+        $i = 0;
+        while (in_array($new_file_name, $this->getAllUploadImageNames())) {
+            if (in_array($new_file_name . $i, $this->getAllUploadImageNames()) == false) {
+                $new_file_name = $new_file_name . $i;
+
+                break;
+            }
+            $i++;
+        }
+        $image = $new_file_name . $new_file_extension;
+
+        $x1 = $this->updateData("
+        UPDATE `blogs` 
+        SET title='$title', decoration='$decoration', text='$text',Image='$image' 
+        WHERE id = '$blogId'
+        ");
+
+        $this->deleteAllCategoriesToBlog($blogId);
+
+        if (count($categories) != 0 && $x1 == true) {
             foreach ($categories as $category) {
                 $categoryId = $this->getCategoryId($category);
 
