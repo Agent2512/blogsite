@@ -101,9 +101,31 @@ class db_functions extends db_connection
     {
         move_uploaded_file($fileLocation, $fileDestination . $fileName);
     }
-    // comments
-    
+    // comment_control
+    public function createComment(string $username, string $blog_id, string $comment)
+    {
+        $user_id = $this->getUserId($username);
 
+        $this->createData("INSERT INTO `comments` (`id`, `text`, `blog_id`, `user_id`, `timestamp`) VALUES (NULL, '$comment', '$blog_id', '$user_id', current_timestamp());");
+    }
+
+    public function getAllCommentsToBlog(string $blog_id)
+    {
+        $x =  $this->getData("
+        SELECT comments.id, comments.timestamp, comments.text, login.username
+        FROM `comments`
+        INNER JOIN login ON login.id = comments.user_id
+        WHERE comments.blog_id = '$blog_id'
+        ");
+
+        if ($x == false) return $x;
+        else return $x[0];
+    }
+    
+    public function getCommentById(string $comment_id)
+    {
+        return $this->getData("SELECT * FROM `comments` WHERE id = '1'");
+    }
     // blog_control
     public function deleteBlogByID(string $id)
     {
