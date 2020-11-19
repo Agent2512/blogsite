@@ -53,6 +53,9 @@
     height: 15%!important;
 }
 
+.h-10 {
+    height: 10%!important;
+}
 /* additional */
 
 .textarea-readonly {
