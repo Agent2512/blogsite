@@ -111,20 +111,30 @@ class db_functions extends db_connection
 
     public function getAllCommentsToBlog(string $blog_id)
     {
-        $x =  $this->getData("
+        return $this->getData("
         SELECT comments.id, comments.timestamp, comments.text, login.username
         FROM `comments`
         INNER JOIN login ON login.id = comments.user_id
         WHERE comments.blog_id = '$blog_id'
         ");
-
-        if ($x == false) return $x;
-        else return $x[0];
     }
     
     public function getCommentById(string $comment_id)
     {
-        return $this->getData("SELECT * FROM `comments` WHERE id = '1'");
+        $x = $this->getData("
+        SELECT comments.id, comments.text, comments.blog_id, comments.user_id, comments.timestamp, login.username
+        FROM `comments`
+        INNER JOIN login on login.id = comments.user_id
+        WHERE comments.id = '$comment_id'
+        ");
+
+        if ($x == false) return $x;
+        else return $x[0];
+    }
+
+    public function deleteCommentById(string $comment_id)
+    {
+        $this->deleteData("DELETE FROM `comments` WHERE id = '$comment_id'");
     }
     // blog_control
     public function deleteBlogByID(string $id)
