@@ -62,7 +62,7 @@ $allCommentsElements = [];
 if ($allComments != false) {
     for ($i = 0; $i < count($allComments); $i++) {
         $tool = "";
-
+        
         if (isset($_SESSION["username"]) && ($_SESSION["username"] == $blog["username"] || $_SESSION["username"] == $allComments[$i]["username"])) {
             $tool = "<a href='".$_SERVER['PHP_SELF'] . '?id=' . $blog['id'] . '&deleteComment=' . $allComments[$i]['id'] ."' class='btn btn-danger align-self-end w-10'>delete comment</a>";
         }
@@ -81,8 +81,11 @@ if ($allComments != false) {
 }
 if (isset($_SESSION["username"]) && isset($_GET["deleteComment"])) {
     $comment = $db->getCommentById($_GET["deleteComment"]);
-    
 
+    if ($_SESSION["username"] == $comment["username"] || $_SESSION["username"] == $blog["username"]) {
+        $db->deleteCommentById($comment["id"]);
+        header("Location: ./blog.php?id=" . $_GET["id"]);
+    }
 }
 
 ?>
