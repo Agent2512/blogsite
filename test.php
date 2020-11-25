@@ -1,42 +1,44 @@
 <?php
-$target_dir = "./img/uploads/";
+$data = [
+    
+];
 
-function getDirFilenames($target)
-{
-    $temp = scandir($target);
-    unset($temp[0]);
-    unset($temp[1]);
-    $temp = array_values($temp);
+array_push($data, array("event_id" => "25-12-2000", "game_id" => "csgo", "result" => "test1"));
+array_push($data, array("event_id" => "25-12-2001", "game_id" => "acc", "result" => "test2"));
+array_push($data, array("event_id" => "25-12-2002", "game_id" => "acc", "result" => "test3"));
+array_push($data, array("event_id" => "25-12-2000", "game_id" => "csgo", "result" => "test4"));
+array_push($data, array("event_id" => "25-12-2002", "game_id" => "lol", "result" => "test5"));
+array_push($data, array("event_id" => "25-12-2003", "game_id" => "lol", "result" => "test6"));
+array_push($data, array("event_id" => "25-12-2001", "game_id" => "acc", "result" => "test7"));
+array_push($data, array("event_id" => "25-12-2002", "game_id" => "csgo", "result" => "test8"));
+array_push($data, array("event_id" => "25-12-2002", "game_id" => "lol", "result" => "test9"));
 
-    for ($i = 0; $i < count($temp); $i++) {
-        $temp[$i] = explode(".", $temp[$i])[0];
-    }
+$outputArray = [];
 
-    return $temp;
+$events = [];
+
+foreach ($data as $row) {
+    // gets all events
+    array_push($events, $row["event_id"]);
+}
+sort($events);
+$events = array_unique($events);
+
+foreach ($events as $event) {
+    // make all events in the outputArray
+    $outputArray[$event] = array();
 }
 
-$new_file = $_FILES["image"];
-$new_file_name = explode(".", $new_file["name"])[0];
-$new_file_extension = "." . explode(".", $new_file["name"])[1];
-
-$i = 0;
-while (in_array($new_file_name, getDirFilenames($target_dir))) {
-    if (in_array($new_file_name . $i, getDirFilenames($target_dir)) == false) {
-        $new_file_name = $new_file_name . $i;
-
-        break;
-    }
-    $i++;
+// add all game_id to the events
+foreach ($data as $row) {
+    $outputArray[$row["event_id"]][$row["game_id"]] = array();
 }
 
-move_uploaded_file($new_file["tmp_name"], $target_dir . $new_file_name . $new_file_extension);
+// add all result to the game_id
+foreach ($data as $row) {
+    array_push($outputArray[$row["event_id"]][$row["game_id"]], $row["result"]);
+}
 
 print_r("<pre>");
-print_r($_FILES);
-print_r("</pre>");
-
-echo "<br>";
-
-print_r("<pre>");
-print_r(getDirFilenames($target_dir));
+print_r($outputArray);
 print_r("</pre>");
