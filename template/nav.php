@@ -23,12 +23,15 @@
                     // ";
                     echo "
                     <li class='nav-item active'>
+                        <a class='nav-link' href='./dashboard.php'>dashboard</a>
+                    </li>
+                    ";
+                    echo "
+                    <li class='nav-item active'>
                         <a class='nav-link' href='./script/userLogout.php'>logout</a>
                     </li>
                     ";
                 }
-            ?>
-            <?php 
                 if(!isset($_SESSION["username"])) {
                     echo "
                     <li class='nav-item active'>
