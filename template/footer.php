@@ -6,6 +6,7 @@
 <script src="js/navbar.js"></script>
 <script src="js/msgbox.js"></script>
 <script src="js/dropdown.js"></script>
+<script src="js/dashboard.js"></script>
 </body>
 
 </html>
