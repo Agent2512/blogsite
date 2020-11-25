@@ -2,7 +2,7 @@
 require("./script/userLoginCheck.php");
 require("./inc/inc.php");
 
-$pageTitle = "make blog";
+$pageTitle = "edit blog";
 require("./template/head.php");
 
 require("./template/nav.php");
