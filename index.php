@@ -10,6 +10,11 @@ $allBlogData = $db->getAllBlogs();
 
 $elements = [];
 
+$x = new blog_control();
+print_r("<pre>");
+print_r($x->getAllBlogs());
+print_r("</pre>");
+
 // $db->deleteUnusedFiles();
 
 if ($allBlogData != null) {
