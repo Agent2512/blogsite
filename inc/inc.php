@@ -6,3 +6,5 @@ require("db/db_functions.php");
 require("form_validator.php");
 // user control
 require("user_control.php");
+// blog control
+require("blog_control.php");
