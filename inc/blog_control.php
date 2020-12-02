@@ -21,30 +21,36 @@ class blog_control
         // all blog form database
         $allBlogs = $this->db->getAllBlogs();
 
-        for ($i=0; $i < count($allBlogs); $i++) { 
+        for ($i = 0; $i < count($allBlogs); $i++) {
             // puts all blog form database in to returnData
             array_push($returnData, $allBlogs[$i]);
             // gets all comments to blog form database
-            $comments = $this->db->getAllCommentsToBlog($allBlogs[$i]["id"]);
-            $categories = $this->db->getAllCategoriesToBlog($allBlogs[$i]["id"]);
-
+            $comments = $this->db->getAllCommentsToBlog($returnData[$i]["id"]);
+            $categories = $this->db->getAllCategoriesToBlog($returnData[$i]["id"]);
+            // process blog
+            // formats date to be ready to print on blog
+            $returnData[$i]["timestamp"] = date("h:i d/m/Y", strtotime($returnData[$i]["timestamp"]));
+            // process comments
             if ($comments != false) {
                 // puts all comments form database in to returnData
                 $returnData[$i]["comments"] = $comments;
-                // formats date to be ready to print
-                for ($j=0; $j < count($returnData[$i]["comments"]); $j++) { 
+                $returnData[$i]["commentsCount"] = count($comments);
+                // formats date to be ready to print in comments
+                for ($j = 0; $j < count($returnData[$i]["comments"]); $j++) {
                     $returnData[$i]["comments"][$j]["timestamp"] = date("h:i d/m/Y", strtotime($returnData[$i]["comments"][$j]["timestamp"]));
                 }
-            } 
-            else $returnData[$i]["comments"] = false;
+            } else {
+                $returnData[$i]["comments"] = false;
+                $returnData[$i]["commentsCount"] = 0;
+            }
 
+            // process categories
             if ($categories != false) {
                 // puts all categories form database in to returnData
                 $returnData[$i]["categories"] = $categories;
-            } 
-            else $returnData[$i]["categories"] = false;
+            } else $returnData[$i]["categories"] = false;
         }
-        
+
 
         if (count($returnData) != 0) return $returnData;
         else return false;
@@ -63,7 +69,7 @@ class blog_control
         // get all blogs in database
         $blogs = $this->getAllBlogs();
 
-        for ($i=0; $i < count($blogs); $i++) { 
+        for ($i = 0; $i < count($blogs); $i++) {
             // finds the width the id of the blog and returns 
             if ($blogs[$i]["id"] == $blogId) return $blogs[$i];
         }
