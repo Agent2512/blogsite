@@ -4,7 +4,7 @@
         <!-- card title -->
         <div class="card-header">create blog</div>
         <div class="card-body">
-            <form class="h-100" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+            <form class="h-100" action="<?= $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Title (max 50 characters)</label>
                     <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
