@@ -5,8 +5,7 @@ require("./template/nav.php");
 require("./template/msg.php");
 
 require("./inc/inc.php");
-$db = new db_functions();
-
+$blog_control = new blog_control();
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -14,9 +13,9 @@ if (!isset($_SESSION)) {
 // check if ID is set and not empty
 if (!isset($_GET["id"]) && !empty($_GET["id"]) && $db->getBlogById($_GET["id"]) != false) header("Location: ./index.php");
 // gets the blog, categories and the comments by the ID
-$blog = $db->getBlogById($_GET["id"]);
-$categories = $db->getAllCategoriesToBlog($_GET["id"]);
-$comments = $db->getAllCommentsToBlog($_GET["id"]);
+$blog = $blog_control->getBlog($_GET["id"]);
+$categories = $blog["categories"];
+$comments = $blog["comments"];
 // add comment to the blog and reload the page
 // checks if user is logged in
 if (isset($_SESSION["username"])) {
