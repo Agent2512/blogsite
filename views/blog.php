@@ -57,6 +57,9 @@
                     <p class='m-0'><?= $comments[$i]['username'] ?>:</p>
                     <p class='m-0'><?= $comments[$i]['text'] ?></p>
                     <p class='m-0 align-self-end'><?= date("h:i d/m/Y", strtotime($comments[$i]['timestamp'])) ?></p>
+                    <?php if (isset($_SESSION["username"]) && ($_SESSION["username"] == $blog["username"] || $_SESSION["username"] == $comments[$i]["username"] ||$_SESSION["username"] == "administrator")) { ?>
+                        <a href="<?= $_SERVER['PHP_SELF'] . "?id=" . $blog["id"] . "&deleteComment=" . $comments[$i]["id"]?>" class='btn btn-danger align-self-end w-10'>delete comment</a>
+                    <?php } ?>
                 </div>
             <?php } ?>
         </div>

@@ -9,7 +9,19 @@ $blog_control = new blog_control();
 if (!isset($_SESSION)) {
     session_start();
 }
+// 
+if (isset($_POST["id"]) && !empty($_POST["id"]) && isset($_POST["btn"]) && !empty($_POST["btn"])) {
+    $blog = $blog_control->getBlog($_POST["id"]);
 
+    if ($blog["username"] == $_SESSION["username"] || $_SESSION["username"] == "administrator") {
+        if ($_POST["btn"] == "delete") {
+            $blog_control->deleteBlog($_POST["id"]);
+            header("Location: ./index.php");
+        } else if ($_POST["btn"] == "edit" && $blog["username"] == $_SESSION["username"]) {
+            header("Location: ./editBlog.php?blog=" . $_POST["id"]);
+        }
+    }
+}
 // check if ID is set and not empty
 if (!isset($_GET["id"]) && !empty($_GET["id"]) && $db->getBlogById($_GET["id"]) != false) header("Location: ./index.php");
 // gets the blog, categories and the comments by the ID
@@ -29,9 +41,21 @@ if (isset($_SESSION["username"])) {
             header("Location: ./blog.php?id=" . $_GET["id"]);
         } else $commentError = "max allowed characters is 255 or empty";
     }
+
+    if (isset($_GET["deleteComment"])) {
+        $comment = [];
+        // finds the comment that need to be deleted
+        for ($i=0; $i < count($comments); $i++) { 
+            if ($comments[$i]["id"] == $_GET["deleteComment"]) $comment = $comments[$i];
+        }
+
+        if ($_SESSION["username"] == $comment["username"] || $_SESSION["username"] == $blog["username"] || $_SESSION["username"] == "administrator") {
+            $blog_control->deleteComment($comment["id"]);
+            header("Location: ./blog.php?id=" . $_GET["id"]);
+        }
+    }
 } else $commentError = "login is required";
 
 // page content
 require("./views/blog.php");
 require("./template/footer.php");
-?>
