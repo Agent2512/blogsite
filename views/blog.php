@@ -9,7 +9,7 @@
                 <?= $blog["title"] ?>
             </div>
             <?php if (isset($_SESSION["username"]) && ($_SESSION["username"] == $blog["username"] || $_SESSION["username"] == "administrator")) { ?>
-                <form method='post' action='<?= $_SERVER[' PHP_SELF'] ?>' class='w-25 h-100 justify-content-around d-flex'>
+                <form method='post' action='<?= $_SERVER['PHP_SELF'] ?>' class='w-25 h-100 justify-content-around d-flex'>
                     <?php if ($_SESSION["username"] == $blog["username"]) { ?>
                         <input type='submit' name='btn' class='btn btn-primary' value='edit'>
                     <?php } ?>
