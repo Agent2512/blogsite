@@ -75,4 +75,14 @@ class blog_control
         }
         return false;
     }
+
+    /**
+     * deletes the blog form database width that ID
+     * 
+     * @param $blogId ID of blog to delete
+     */
+    public function deleteBlog(string $blogId)
+    {
+        $this->db->deleteBlogByID($blogId);
+    }
 }
