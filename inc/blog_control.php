@@ -77,6 +77,20 @@ class blog_control
     }
 
     /**
+     * edits data on blog in database 
+     * 
+     * @param string $blogId the ID of the blog to edit
+     * 
+     * @param array $post_data the data as title and text 
+     * 
+     * @param array $image_data the image data form $_FILES
+     */
+    public function editBlog(string $blogId, array $post_data, array $image_data)
+    {
+        $this->db->editBlog($blogId, $post_data, $image_data);
+    }
+
+    /**
      * deletes the blog form database width that ID
      * 
      * @param $blogId ID of blog to delete
