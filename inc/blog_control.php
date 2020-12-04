@@ -85,4 +85,15 @@ class blog_control
     {
         $this->db->deleteBlogByID($blogId);
     }
+
+    // comment_control
+    /**
+     * removes a comment form database
+     * 
+     * @param string $commentId the ID of the comment that need to be removed  
+     */
+    public function deleteComment(string $commentId)
+    {
+        $this->db->deleteCommentById($commentId);
+    }
 }
