@@ -79,6 +79,20 @@ class blog_control
     /**
      * edits data on blog in database 
      * 
+     * @param string $username the username who is making the blog
+     * 
+     * @param array $post_data the data as title and text 
+     * 
+     * @param array $image_data the image data form $_FILES
+     */
+    public function makeBlog(string $username, array $post_data, array $image_data)
+    {
+        $this->db->makeBlog($username, $post_data, $image_data);
+    }
+
+    /**
+     * edits data on blog in database 
+     * 
      * @param string $blogId the ID of the blog to edit
      * 
      * @param array $post_data the data as title and text 
