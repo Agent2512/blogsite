@@ -41,7 +41,7 @@ class blog_control
         // all blog form database
         $allBlogs = $this->db->getAllBlogs();
 
-        for ($i = 0; $i < count($allBlogs); $i++) {
+        if ($allBlogs != false) for ($i = 0; $i < count($allBlogs); $i++) {
             // puts all blog form database in to returnData
             array_push($returnData, $allBlogs[$i]);
             // process blog

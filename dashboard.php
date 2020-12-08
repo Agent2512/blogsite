@@ -41,7 +41,7 @@ if ($_SESSION["username"] != "administrator") {
 } else {
     // load the number of all used categories
     $arrayContainer = array();
-    for ($i = 0; $i < count($Blogs); $i++) {
+    if ($Blogs != false) for ($i = 0; $i < count($Blogs); $i++) {
         $blogCategories = $Blogs[$i]["categories"];
         if ($blogCategories != false) {
             array_push($arrayContainer, $blogCategories);
@@ -61,7 +61,7 @@ if ($_SESSION["username"] != "administrator") {
 
     // load total number of blog and comments
     $numberOfComments = 0;
-    for ($i = 0; $i < count($Blogs); $i++) {
+    if ($Blogs != false) for ($i = 0; $i < count($Blogs); $i++) {
         if ($Blogs[$i]["comments"] != false) $numberOfComments += $Blogs[$i]["commentsCount"];
     }
 }

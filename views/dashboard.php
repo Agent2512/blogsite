@@ -11,7 +11,7 @@
             </div>
             <div class="border border-dark rounded w-10 d-flex flex-column justify-content-center">
                 <p class="m-0 text-center">total number of blogs</p>
-                <p class="m-0 text-center"><?= count($Blogs) ?></p>
+                <p class="m-0 text-center"><?php if ($Blogs != false) echo count($Blogs); else echo "0"; ?></p>
             </div>
             <div class="border border-dark rounded w-10 d-flex flex-column justify-content-center">
                 <p class="m-0 text-center">total number of comments</p>
@@ -20,7 +20,7 @@
         </div>
     <?php } ?>
 
-    <?php for ($i = 0; $i < count($Blogs); $i++) { ?>
+    <?php if ($Blogs != false) for ($i = 0; $i < count($Blogs); $i++) { ?>
         <div class='card mx-2 my-2 w-100 h-75 h-fit border-dark'>
             <div class='card-header d-flex justify-content-around border-dark py-2 blog'>
                 <p class='m-0'><?= $Blogs[$i]["title"] ?></p>
