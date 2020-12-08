@@ -8,6 +8,26 @@ class blog_control
         $this->db = new db_functions();
     }
 
+    private function processComments(string $blogId)
+    {
+        $comments = $this->db->getAllCommentsToBlog($blogId);
+
+        if ($comments != false) {
+            for ($i = 0; $i < count($comments); $i++) {
+                $comments[$i]["timestamp"] = date("h:i d/m/Y", strtotime($comments[$i]["timestamp"]));
+            }
+
+            return $comments;
+        } else return false;
+    }
+
+    public function processCategories(string $blogId)
+    {
+        $categories = $this->db->getAllCategoriesToBlog($blogId);
+
+        if ($categories != false) return $categories;
+        else return false;
+    }
     /**
      * gets all blogs form database
      * 
@@ -24,33 +44,17 @@ class blog_control
         for ($i = 0; $i < count($allBlogs); $i++) {
             // puts all blog form database in to returnData
             array_push($returnData, $allBlogs[$i]);
-            // gets all comments to blog form database
-            $comments = $this->db->getAllCommentsToBlog($returnData[$i]["id"]);
-            $categories = $this->db->getAllCategoriesToBlog($returnData[$i]["id"]);
             // process blog
             // formats date to be ready to print on blog
             $returnData[$i]["timestamp"] = date("h:i d/m/Y", strtotime($returnData[$i]["timestamp"]));
             // process comments
-            if ($comments != false) {
-                // puts all comments form database in to returnData
-                $returnData[$i]["comments"] = $comments;
-                $returnData[$i]["commentsCount"] = count($comments);
-                // formats date to be ready to print in comments
-                for ($j = 0; $j < count($returnData[$i]["comments"]); $j++) {
-                    $returnData[$i]["comments"][$j]["timestamp"] = date("h:i d/m/Y", strtotime($returnData[$i]["comments"][$j]["timestamp"]));
-                }
-            } else {
-                $returnData[$i]["comments"] = false;
-                $returnData[$i]["commentsCount"] = 0;
-            }
+            $returnData[$i]["comments"] = $this->processComments($returnData[$i]["id"]);
+            if ($returnData[$i]["comments"] != false)  $returnData[$i]["commentsCount"] = count($returnData[$i]["comments"]);
+            else $returnData[$i]["commentsCount"] = 0;
 
             // process categories
-            if ($categories != false) {
-                // puts all categories form database in to returnData
-                $returnData[$i]["categories"] = $categories;
-            } else $returnData[$i]["categories"] = false;
+            $returnData[$i]["categories"] = $this->processCategories($returnData[$i]["id"]);
         }
-
 
         if (count($returnData) != 0) return $returnData;
         else return false;
@@ -67,13 +71,20 @@ class blog_control
     public function getBlog(string $blogId)
     {
         // get all blogs in database
-        $blogs = $this->getAllBlogs();
+        $blog = $this->db->getBlogById($blogId);
 
-        for ($i = 0; $i < count($blogs); $i++) {
-            // finds the width the id of the blog and returns 
-            if ($blogs[$i]["id"] == $blogId) return $blogs[$i];
-        }
-        return false;
+        if ($blog != false) {
+            $blog["timestamp"] = date("h:i d/m/Y", strtotime($blog["timestamp"]));
+            // process comments
+            $blog["comments"] = $this->processComments($blog["id"]);
+            if ($blog["comments"] != false)  $blog["commentsCount"] = count($blog["comments"]);
+            else $blog["commentsCount"] = 0;
+
+            // process categories
+            $blog["categories"] = $this->processCategories($blog["id"]);
+
+            return $blog;
+        } else return false;
     }
 
     /**
