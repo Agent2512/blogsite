@@ -1,12 +1,11 @@
 <?php
-require("./script/userLoginCheck.php");
-require("./inc/inc.php");
-
 $pageTitle = "dashboard";
 require("./template/head.php");
-
 require("./template/nav.php");
 require("./template/msg.php");
+
+require("./script/userLoginCheck.php");
+require("./inc/inc.php");
 
 if (!isset($_SESSION)) {
     session_start();

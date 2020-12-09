@@ -1,12 +1,11 @@
 <?php
-require("./script/userLoginCheck.php");
-require("./inc/inc.php");
-
 $pageTitle = "edit blog";
 require("./template/head.php");
-
 require("./template/nav.php");
 require("./template/msg.php");
+
+require("./script/userLoginCheck.php");
+require("./inc/inc.php");
 
 $db = new db_functions();
 $blog_control = new blog_control();

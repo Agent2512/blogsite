@@ -5,6 +5,7 @@ require("./template/nav.php");
 require("./template/msg.php");
 
 require("./inc/inc.php");
+
 $blog_control = new blog_control();
 if (!isset($_SESSION)) {
     session_start();

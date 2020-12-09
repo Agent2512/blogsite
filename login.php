@@ -1,8 +1,9 @@
-<?php $pageTitle = "login";
-require("./template/head.php"); ?>
-<?php require("./template/nav.php"); ?>
-<?php require("./template/msg.php"); ?>
 <?php
+$pageTitle = "login";
+require("./template/head.php"); 
+require("./template/nav.php"); 
+require("./template/msg.php"); 
+
 require("inc/inc.php");
 
 if (isset($_POST['submit'])) {
@@ -27,5 +28,4 @@ if (isset($_POST['submit'])) {
 }
 
 require("./views/login.php");
-require("./template/footer.php"); 
-?>
+require("./template/footer.php");
