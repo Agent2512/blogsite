@@ -5,15 +5,27 @@ class blog_control
 
     public function __construct()
     {
+        // makes connection to database
         $this->db = new db_functions();
     }
 
+    /**
+     * gets all the comments form database to one blog
+     * 
+     * @param string $blogId the ID of the blog to get comments
+     * 
+     * @return false|array returns false if an error occurred or the return form database is empty,
+     * returns array if database return is one or more items
+     */
     private function processComments(string $blogId)
     {
+        // gets all comments form database
         $comments = $this->db->getAllCommentsToBlog($blogId);
 
+        // run if not false
         if ($comments != false) {
             for ($i = 0; $i < count($comments); $i++) {
+                // formats date to fit standard
                 $comments[$i]["timestamp"] = date("h:i d/m/Y", strtotime($comments[$i]["timestamp"]));
             }
 
@@ -21,10 +33,20 @@ class blog_control
         } else return false;
     }
 
-    public function processCategories(string $blogId)
+    /**
+     * gets all the categories form database to one blog
+     * 
+     * @param string $blogId the ID of the blog to get categories
+     * 
+     * @return false|array returns false if an error occurred or the return form database is empty,
+     * returns array if database return is one or more items
+     */
+    private function processCategories(string $blogId)
     {
+        // gets all categories form database
         $categories = $this->db->getAllCategoriesToBlog($blogId);
 
+        // returns if not false
         if ($categories != false) return $categories;
         else return false;
     }
@@ -44,9 +66,10 @@ class blog_control
         if ($allBlogs != false) for ($i = 0; $i < count($allBlogs); $i++) {
             // puts all blog form database in to returnData
             array_push($returnData, $allBlogs[$i]);
-            // process blog
-            // formats date to be ready to print on blog
+
+            // formats date to fit standard
             $returnData[$i]["timestamp"] = date("h:i d/m/Y", strtotime($returnData[$i]["timestamp"]));
+
             // process comments
             $returnData[$i]["comments"] = $this->processComments($returnData[$i]["id"]);
             if ($returnData[$i]["comments"] != false)  $returnData[$i]["commentsCount"] = count($returnData[$i]["comments"]);
