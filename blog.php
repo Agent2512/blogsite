@@ -1,4 +1,5 @@
 <?php
+// requires all dependencies
 $pageTitle = "blog";
 require("./template/head.php");
 require("./template/nav.php");
@@ -6,11 +7,18 @@ require("./template/msg.php");
 
 require("./inc/inc.php");
 
+// starts all needed class
 $blog_control = new blog_control();
+$db = new db_functions();
+// starts session if not started
 if (!isset($_SESSION)) {
     session_start();
 }
-// 
+
+/**
+ * takes $_POST data 
+ * checks if [id] and [btn] is set and not empty
+ */
 if (isset($_POST["id"]) && !empty($_POST["id"]) && isset($_POST["btn"]) && !empty($_POST["btn"])) {
     $blog = $blog_control->getBlog($_POST["id"]);
 
@@ -44,12 +52,9 @@ if (isset($_SESSION["username"])) {
     }
 
     if (isset($_GET["deleteComment"])) {
-        $comment = [];
         // finds the comment that need to be deleted
-        for ($i=0; $i < count($comments); $i++) { 
-            if ($comments[$i]["id"] == $_GET["deleteComment"]) $comment = $comments[$i];
-        }
-
+        $comment = $db->getCommentById($_GET["deleteComment"]);
+        
         if ($_SESSION["username"] == $comment["username"] || $_SESSION["username"] == $blog["username"] || $_SESSION["username"] == "administrator") {
             $blog_control->deleteComment($comment["id"]);
             header("Location: ./blog.php?id=" . $_GET["id"]);

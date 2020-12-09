@@ -1,4 +1,5 @@
 <?php
+// requires all dependencies
 $pageTitle = "dashboard";
 require("./template/head.php");
 require("./template/nav.php");
@@ -7,22 +8,28 @@ require("./template/msg.php");
 require("./script/userLoginCheck.php");
 require("./inc/inc.php");
 
+// starts all needed class
+$blog_control = new blog_control();
+
+// starts session if not started
 if (!isset($_SESSION)) {
     session_start();
 }
-$blog_control = new blog_control();
-$db = new db_functions();
 
-if (isset($_POST["id"]) && !empty($_POST["id"] && isset($_POST["btn"]) && !empty($_POST["btn"]))) {
-    $key = $_POST["btn"];
-    $id = $_POST["id"];
-    $blog = $db->getBlogById($id);
 
-    if ($_SESSION["username"] == $blog["username"] || $_SESSION["username"] == "administrator") {
-        if ($key == "delete") {
-            $db->deleteBlogByID($id);
-        } else if ($key == "edit") {
-            header("Location: ./editBlog.php?blog=$id");
+/**
+ * takes $_POST data 
+ * checks if [id] and [btn] is set and not empty
+ */
+if (isset($_POST["id"]) && !empty($_POST["id"]) && isset($_POST["btn"]) && !empty($_POST["btn"])) {
+    $blog = $blog_control->getBlog($_POST["id"]);
+
+    if ($blog["username"] == $_SESSION["username"] || $_SESSION["username"] == "administrator") {
+        if ($_POST["btn"] == "delete") {
+            $blog_control->deleteBlog($_POST["id"]);
+            header("Location: ./index.php");
+        } else if ($_POST["btn"] == "edit" && $blog["username"] == $_SESSION["username"]) {
+            header("Location: ./editBlog.php?blog=" . $_POST["id"]);
         }
     }
 }

@@ -1,14 +1,17 @@
 <?php
+// requires all dependencies
 $pageTitle = "login";
 require("./template/head.php"); 
 require("./template/nav.php"); 
 require("./template/msg.php"); 
 
-require("inc/inc.php");
+require("./inc/inc.php");
+
+// starts all needed class
+$form_validator = new form_validator($_POST);
+$user_control = new user_control($_POST);
 
 if (isset($_POST['submit'])) {
-    $form_validator = new form_validator($_POST);
-    $user_control = new user_control($_POST);
     $errors = $form_validator->validateForm($_POST["submit"]);
 
     if (count($errors) == 0) {
