@@ -32,12 +32,12 @@ if (isset($_POST["id"]) && !empty($_POST["id"]) && isset($_POST["btn"]) && !empt
     }
 }
 // check if ID is set and not empty
-if (!isset($_GET["id"]) && !empty($_GET["id"]) && $db->getBlogById($_GET["id"]) != false) header("Location: ./index.php");
+if (!isset($_GET["id"]) && !empty($_GET["id"]) && $blog_control->getBlog($_POST["id"]) != false) header("Location: ./index.php");
 // gets the blog, categories and the comments by the ID
 $blog = $blog_control->getBlog($_GET["id"]);
 $categories = $blog["categories"];
 $comments = $blog["comments"];
-// add comment to the blog and reload the page
+
 // checks if user is logged in
 if (isset($_SESSION["username"])) {
     // checks if there is a new comment
@@ -54,7 +54,7 @@ if (isset($_SESSION["username"])) {
     if (isset($_GET["deleteComment"])) {
         // finds the comment that need to be deleted
         $comment = $db->getCommentById($_GET["deleteComment"]);
-        
+
         if ($_SESSION["username"] == $comment["username"] || $_SESSION["username"] == $blog["username"] || $_SESSION["username"] == "administrator") {
             $blog_control->deleteComment($comment["id"]);
             header("Location: ./blog.php?id=" . $_GET["id"]);

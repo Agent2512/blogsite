@@ -34,10 +34,11 @@ if (isset($_POST["id"]) && !empty($_POST["id"]) && isset($_POST["btn"]) && !empt
     }
 }
 
-
+// gets all blog form database
 $Blogs = $blog_control->getAllBlogs();
 
 if ($_SESSION["username"] != "administrator") {
+    // removes all blog not equal to username on view
     for ($i = 0; $i < count($Blogs); $i++) {
         if ($Blogs[$i]["username"] != $_SESSION["username"]) {
             unset($Blogs[$i]);
@@ -54,6 +55,7 @@ if ($_SESSION["username"] != "administrator") {
         }
     }
 
+    // makes a counter tor the number of categories used
     $arrayOutput = array();
     for ($i = 0; $i < count($arrayContainer); $i++) {
         for ($j = 0; $j < count($arrayContainer[$i]); $j++) {
@@ -72,6 +74,6 @@ if ($_SESSION["username"] != "administrator") {
     }
 }
 
+// page content
 require("./views/dashboard.php");
-
 require("./template/footer.php");

@@ -9,9 +9,9 @@ require("./inc/inc.php");
 
 // starts all needed class
 $blog_control = new blog_control();
-
+// get all blogs from database
 $blogs = $blog_control->getAllBlogs();
 
+// page content
 require("./views/index.php");
 require("./template/footer.php");
-?>
