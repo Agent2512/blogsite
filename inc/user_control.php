@@ -4,6 +4,11 @@ class user_control {
     private $data;
     private $errors = [];
 
+    /**
+     * takes all data from $_POST
+     * 
+     * @param array $post_data the data from $_POST
+     */
     public function __construct(array $post_data = []){
         $this->data = $post_data;
 
@@ -14,6 +19,11 @@ class user_control {
         }
     }
 
+    /**
+     * control is a function where you it what to width the database
+     * 
+     * @param string $control login or register
+     */
     public function control(string $control)
     {
         if ($control == "Login") {
@@ -26,6 +36,9 @@ class user_control {
         return $this->errors;
     }
 
+    /**
+     * logs a user in
+     */
     private function login()
     {
         $username = strtolower($this->data["usernameLogin"]);
@@ -50,6 +63,9 @@ class user_control {
         }
     }
 
+    /**
+     * registers a user in database
+     */
     private function register()
     {
         $email = $this->data["emailRegister"];
