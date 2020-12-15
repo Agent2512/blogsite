@@ -20,7 +20,7 @@ class user_control {
     }
 
     /**
-     * control is a function where you it what to width the data
+     * control is a function where you tell it what to width the data
      * 
      * @param string $control login or register
      */

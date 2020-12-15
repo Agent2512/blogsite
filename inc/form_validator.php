@@ -20,11 +20,21 @@ class form_validator
         ]
     ];
 
+    /**
+     * takes all data from $_POST
+     * 
+     * @param array $post_data the data from $_POST
+     */
     public function __construct($post_data)
     {
         $this->data = $post_data;
     }
 
+    /**
+     * control is a function where you tell it what to width the data
+     * 
+     * @param string $fieldKey login, register and submitBlog
+     */
     public function validateForm($fieldKey)
     {
         $fields = $this->fields[$fieldKey];
