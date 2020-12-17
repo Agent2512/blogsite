@@ -89,7 +89,16 @@ class user_control {
         }
     }
 
-    private function addError($key, $val)
+    /**
+     * adds errors to return array
+     * 
+     * @param string $kay what field is the error in
+     * 
+     * @param string $val the error message
+     * 
+     * @return array all found in fields
+     */
+    private function addError(string $key, string $val)
     {
         $this->errors[$key] = $val;
     }
