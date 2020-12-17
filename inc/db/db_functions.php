@@ -336,7 +336,7 @@ class db_functions extends db_connection
     public function getAllBlogs()
     {
         return $this->getData("
-        SELECT blogs.id, blogs.title, blogs.decoration, blogs.text, blogs.Image, blogs.timestamp, login.username
+        SELECT blogs.id, blogs.title, blogs.decoration, blogs.text, blogs.Image, blogs.timestamp, blogs.approved, login.username
         FROM `blogs`
         INNER JOIN login on login.id = blogs.user_id
         ");
@@ -373,7 +373,7 @@ class db_functions extends db_connection
     public function getBlogById(string $blogId)
     {
         $x = $this->getData("
-        SELECT blogs.id, blogs.title, blogs.decoration, blogs.text, blogs.Image, login.username, blogs.timestamp
+        SELECT blogs.id, blogs.title, blogs.decoration, blogs.text, blogs.Image, blogs.approved, login.username, blogs.timestamp
         FROM `blogs`
         INNER JOIN login ON login.id = blogs.user_id
         WHERE blogs.id = '$blogId'
