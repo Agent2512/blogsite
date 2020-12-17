@@ -34,11 +34,13 @@ class form_validator
      * control is a function where you tell it what to width the data
      * 
      * @param string $fieldKey login, register and submitBlog
+     * 
+     * @return array returns all errors found in checked fields 
      */
     public function validateForm($fieldKey)
     {
         $fields = $this->fields[$fieldKey];
-        
+
 
         if ($fieldKey == "Login") {
             foreach ($fields as $field) {
@@ -48,6 +50,7 @@ class form_validator
                 }
             }
 
+            // check in these fields
             $this->validateUsername($fieldKey);
             $this->validatePassword($fieldKey);
         } else if ($fieldKey == "Register") {
@@ -58,6 +61,7 @@ class form_validator
                 }
             }
 
+            // check in these fields
             $this->validateUsername($fieldKey);
             $this->validatePassword($fieldKey);
             $this->validateEmail($fieldKey);
@@ -69,12 +73,21 @@ class form_validator
                 }
             }
 
+            // check in these fields
             $this->validateBlog($fields);
         }
 
+        // returns all errors found in checked fields 
         return $this->errors;
     }
 
+    /**
+     * validates a username after some condition
+     * 
+     * @param string $addErrorId is what field the error is in like login or register
+     * 
+     * @return void any errors in conditions is added to $this->errors;
+     */
     private function validateUsername(string $addErrorId = "")
     {
         $val = trim($this->data["username$addErrorId"]);
@@ -92,6 +105,13 @@ class form_validator
         }
     }
 
+    /**
+     * validates a password after some condition
+     * 
+     * @param string $addErrorId is what field the error is in like login or register
+     * 
+     * @return void any errors in conditions is added to $this->errors;
+     */
     private function validatePassword(string $addErrorId = "")
     {
         $val = trim($this->data["password$addErrorId"]);
@@ -109,6 +129,13 @@ class form_validator
         }
     }
 
+    /**
+     * validates a email after some condition
+     * 
+     * @param string $addErrorId is what field the error is in like login or register
+     * 
+     * @return void any errors in conditions is added to $this->errors;
+     */
     private function validateEmail(string $addErrorId = "")
     {
         $val = trim($this->data["email$addErrorId"]);
@@ -126,29 +153,41 @@ class form_validator
         }
     }
 
-    private function validateBlog($fields)
+    /**
+     * validates a blog after some condition
+     * 
+     * @param array $fields what field areas that need to be validated
+     * 
+     * @return void any errors in conditions is added to $this->errors;
+     */
+    private function validateBlog(array $fields)
     {
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             $val = trim($this->data[$field]);
-            
+
             if (empty($val)) {
-                $this->addError($field."Error", "$field cannot be empty");
-            }
-            else {
+                $this->addError($field . "Error", "$field cannot be empty");
+            } else {
                 if ($field == "title" && strlen($val) >= 50) {
-                    $this->addError($field."Error", "$field is max 50");
-                }
-                else if($field == "decoration" && strlen($val) >= 50) {
-                    $this->addError($field."Error", "$field is max 50");
-                }
-                else if($field == "text" && strlen($val) >= 500) {
-                    $this->addError($field."Error", "$field is max 500");
+                    $this->addError($field . "Error", "$field is max 50");
+                } else if ($field == "decoration" && strlen($val) >= 50) {
+                    $this->addError($field . "Error", "$field is max 50");
+                } else if ($field == "text" && strlen($val) >= 500) {
+                    $this->addError($field . "Error", "$field is max 500");
                 }
             }
         }
-
     }
 
+    /**
+     * adds errors to return array
+     * 
+     * @param string $kay what field is the error in
+     * 
+     * @param string $val the error message
+     * 
+     * @return array all found in fields
+     */
     private function addError($key, $val)
     {
         $this->errors[$key] = $val;
