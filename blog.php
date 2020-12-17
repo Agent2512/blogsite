@@ -37,7 +37,8 @@ if (!isset($_GET["id"]) && !empty($_GET["id"]) && $blog_control->getBlog($_POST[
 $blog = $blog_control->getBlog($_GET["id"]);
 $categories = $blog["categories"];
 $comments = $blog["comments"];
-
+// if not approved by administrator
+if ($blog["approved"] == 0) if ($_SESSION["username"] != "administrator") header("Location: ./index.php");
 // checks if user is logged in
 if (isset($_SESSION["username"])) {
     // checks if there is a new comment
