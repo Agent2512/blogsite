@@ -39,11 +39,8 @@ $Blogs = $blog_control->getAllBlogs();
 
 if ($_SESSION["username"] != "administrator") {
     // removes all blog not equal to username on view
-    for ($i = 0; $i < count($Blogs); $i++) {
-        if ($Blogs[$i]["username"] != $_SESSION["username"]) {
-            unset($Blogs[$i]);
-        }
-    }
+    if ($Blogs != false) foreach ($Blogs as $key => $blog) if ($blog["username"] != $_SESSION["username"]) unset($Blogs[$key]);
+
     $Blogs = array_values($Blogs);
 } else {
     // load the number of all used categories
