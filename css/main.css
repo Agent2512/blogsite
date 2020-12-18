@@ -28,7 +28,9 @@
     width: 40%!important;
 }
 
-
+.w-90{
+    width: 90%!important;
+}
 /* height */
 .h-fit {
     height: fit-content!important;
