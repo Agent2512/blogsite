@@ -24,6 +24,11 @@
     width: 20%!important;
 }
 
+.w-40{
+    width: 40%!important;
+}
+
+
 /* height */
 .h-fit {
     height: fit-content!important;
