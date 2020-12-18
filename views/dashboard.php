@@ -1,6 +1,6 @@
 <div class="container-fluid w-100 h-90">
     <?php if ($_SESSION["username"] == "administrator") { ?>
-        <div class='card mx-2 my-2 p-3 w-100 h-fit border-dark d-flex flex-row justify-content-between'>
+        <div class='card mx-2 my-2 p-3 w-100 h-fit border-dark d-flex flex-row justify-content-between flex-wrap'>
             <div class="w-75 d-flex flex-row flex-wrap">
                 <?php foreach ($arrayOutput as $key => $value) { ?>
                     <div class="border border-dark rounded d-flex m-1">
@@ -11,11 +11,41 @@
             </div>
             <div class="border border-dark rounded w-10 d-flex flex-column justify-content-center">
                 <p class="m-0 text-center">total number of blogs</p>
-                <p class="m-0 text-center"><?php if ($Blogs != false) echo count($Blogs); else echo "0"; ?></p>
+                <p class="m-0 text-center"><?php if ($Blogs != false) echo count($Blogs);
+                                            else echo "0"; ?></p>
             </div>
             <div class="border border-dark rounded w-10 d-flex flex-column justify-content-center">
                 <p class="m-0 text-center">total number of comments</p>
                 <p class="m-0 text-center"><?= $numberOfComments ?></p>
+            </div>
+            <div class="d-flex flex-row h-25 justify-content-around mt-3 w-100">
+                <div class="card w-40 border-dark">
+                    <div class='card-header d-flex justify-content-around border-dark py-2'>
+                        <p class='m-0'>Not a approved users</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">test</p>
+                    </div>
+                </div>
+                <div class="card w-40 border-dark">
+                    <div class='card-header d-flex justify-content-around border-dark py-2'>
+                        <p class='m-0'>Not a approved blogs</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="m-auto border border-dark rounded d-flex justify-content-between">
+                            <p class="m-0 my-auto w-50">test</p>
+                            <div class="">
+                                <!-- <input type="submit" name="btn" value="" class="btn btn-primary oi oi-eye"> -->
+                                <!-- <input type="submit" name="btn" value="" class="btn btn-primary oi oi-check"> -->
+                                <!-- <input type="submit" name="btn" value="" class="btn btn-primary oi oi-trash"> -->
+                                <input type="hidden" name="id" value="">
+                                <a href="#" class="btn btn-primary"><span class="oi oi-eye"></span></a>
+                                <a href="#" class="btn btn-success"><span class="oi oi-check"></span></a>
+                                <a href="#" class="btn btn-danger"><span class="oi oi-trash"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     <?php } ?>
@@ -38,6 +68,7 @@
                             <div class='h-fit w-75 border border-dark rounded m-auto d-flex justify-content-center flex-column'>
                                 <!-- username to blog -->
                                 <p class='card-text text-center h3'><?= $Blogs[$i]["username"] ?></p>
+
                             </div>
                             <div class='h-fit w-75 border border-dark rounded m-auto d-flex justify-content-center flex-column'>
                                 <!-- date for the blog create -->
@@ -48,6 +79,12 @@
                                 <!-- how many comments on blog -->
                                 <p class='card-text text-center mb-0'>count off comments</p>
                                 <p class='card-text text-center h3'><?= $Blogs[$i]["commentsCount"] ?></p>
+                            </div>
+                            <div class='h-fit w-75 border border-dark rounded m-auto d-flex justify-content-center flex-column <?php if ($Blogs[$i]["approved"] == 0) echo "bg-danger";
+                                                                                                                                else echo "bg-success"; ?>'>
+                                <!-- approved to blog -->
+                                <p class='card-text text-center h3'>Approved</p>
+
                             </div>
                         </div>
                         <div class='col p-0 h-100'>
