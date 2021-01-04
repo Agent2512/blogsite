@@ -18,7 +18,9 @@
                 <p class="m-0 text-center">total number of comments</p>
                 <p class="m-0 text-center"><?= $numberOfComments ?></p>
             </div>
+            <!-- approve section -->
             <div class="d-flex flex-row h-25 justify-content-around mt-3 w-100">
+                <!-- approve users -->
                 <div class="card w-40 border-dark">
                     <div class='card-header d-flex justify-content-around border-dark py-2'>
                         <p class='m-0'>Not a approved users</p>
@@ -27,25 +29,30 @@
                         <p class="card-text">test</p>
                     </div>
                 </div>
+                <?php if ($Blogs != false && 1 <= count(array_filter(array_column($Blogs, "approved"),"filter"))) { ?>
+                <!-- approve blogs -->
                 <div class="card w-40 border-dark">
                     <div class='card-header d-flex justify-content-around border-dark py-2'>
                         <p class='m-0'>Not a approved blogs</p>
                     </div>
                     <div class="card-body">
-                        <div class="m-auto border border-dark rounded d-flex justify-content-between">
-                            <p class="m-0 my-auto w-50">test</p>
-                            <div class="">
-                                <!-- <input type="submit" name="btn" value="" class="btn btn-primary oi oi-eye"> -->
-                                <!-- <input type="submit" name="btn" value="" class="btn btn-primary oi oi-check"> -->
-                                <!-- <input type="submit" name="btn" value="" class="btn btn-primary oi oi-trash"> -->
-                                <input type="hidden" name="id" value="">
-                                <a href="#" class="btn btn-primary"><span class="oi oi-eye"></span></a>
-                                <a href="#" class="btn btn-success"><span class="oi oi-check"></span></a>
-                                <a href="#" class="btn btn-danger"><span class="oi oi-trash"></span></a>
-                            </div>
+                        <?php for ($i = 0; $i < count($Blogs); $i++) { if ($Blogs[$i]["approved"] == 0) {?>
+                        <div class="mb-1 border border-dark rounded d-flex justify-content-between">
+                            <!-- blog title and username -->
+                            <p class="m-0 my-auto w-50">title: <?= $Blogs[$i]["title"] ?> by: <?= $Blogs[$i]["username"] ?></p>
+                            <!-- btn section -->
+                            <form method='post' action='<?= $_SERVER['PHP_SELF'] ?>'>
+                                <a href="./blog.php?id=<?= $Blogs[$i]["id"] ?>" class="btn btn-primary"><span class="oi oi-eye"></span></a>
+                                <button type="submit" name='btn' value="approve" class="btn btn-success"><span class="oi oi-check"></span></button>
+                                <button type="submit" name='btn' value="delete" class="btn btn-danger"><span class="oi oi-trash"></span></button>
+
+                                <input type="hidden" name="id" value="<?= $Blogs[$i]["id"] ?>">
+                            </form>
                         </div>
+                        <?php }} ?>
                     </div>
                 </div>
+                <?php } ?>
             </div>
         </div>
     <?php } ?>

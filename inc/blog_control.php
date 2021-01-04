@@ -148,6 +148,16 @@ class blog_control
         $this->db->deleteBlogByID($blogId);
     }
 
+    /**
+     * approves a blog to be published
+     * 
+     * @param string $blogId ID of blog
+     */
+    public function approveBlog(string $blogId)
+    {
+        $this->db->approveBlogByID($blogId);
+    }
+
     // comment_control
     /**
      * removes a comment form database

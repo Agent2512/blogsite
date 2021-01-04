@@ -16,20 +16,31 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-
+function filter($var)
+{
+    return($var == 0);
+}
 /**
  * takes $_POST data 
  * checks if [id] and [btn] is set and not empty
+ *  delete, edit and approve
  */
 if (isset($_POST["id"]) && !empty($_POST["id"]) && isset($_POST["btn"]) && !empty($_POST["btn"])) {
     $blog = $blog_control->getBlog($_POST["id"]);
 
-    if ($blog["username"] == $_SESSION["username"] || $_SESSION["username"] == "administrator") {
-        if ($_POST["btn"] == "delete") {
+    if ($_POST["btn"] == "delete") {
+        if ($blog["username"] == $_SESSION["username"] || $_SESSION["username"] == "administrator") {
             $blog_control->deleteBlog($_POST["id"]);
-            header("Location: ./index.php");
-        } else if ($_POST["btn"] == "edit" && $blog["username"] == $_SESSION["username"]) {
+        }
+    }
+    else if ($_POST["btn"] == "edit") {
+        if ($blog["username"] == $_SESSION["username"]) {
             header("Location: ./editBlog.php?blog=" . $_POST["id"]);
+        }
+    }
+    else if ($_POST["btn"] == "approve") {
+        if ($_SESSION["username"] == "administrator") {
+            $blog_control->approveBlog($_POST["id"]);
         }
     }
 }

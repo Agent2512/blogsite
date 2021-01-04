@@ -291,6 +291,18 @@ class db_functions extends db_connection
     // blog_control
 
     /**
+     * approves a blog to be published
+     * 
+     * @param string $id ID of blog
+     * 
+     * @return bool returns true if successful
+     */
+    public function approveBlogByID(string $id)
+    {
+        return $this->updateData("UPDATE `blogs` SET `approved`= 1 WHERE `id` = $id");
+    }
+
+    /**
      * deletes one blog by ID
      * 
      * @param string $id the ID of the blog to delete 
