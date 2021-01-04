@@ -10,6 +10,10 @@ require("./inc/inc.php");
 
 // starts all needed class
 $blog_control = new blog_control();
+$user_control = new user_control();
+
+// gets all user in database
+$allUsers = $user_control->getAllUsers();
 
 // starts session if not started
 if (!isset($_SESSION)) {
@@ -23,7 +27,10 @@ function filter($var)
 /**
  * takes $_POST data 
  * checks if [id] and [btn] is set and not empty
+ *  if blog
  *  delete, edit and approve
+ * if user
+ * userApprove and userDelete
  */
 if (isset($_POST["id"]) && !empty($_POST["id"]) && isset($_POST["btn"]) && !empty($_POST["btn"])) {
     $blog = $blog_control->getBlog($_POST["id"]);
@@ -43,6 +50,18 @@ if (isset($_POST["id"]) && !empty($_POST["id"]) && isset($_POST["btn"]) && !empt
             $blog_control->approveBlog($_POST["id"]);
         }
     }
+    else if ($_POST["btn"] == "userApprove") {
+        if ($_SESSION["username"] == "administrator") {
+            $user_control->userApprove($_POST["id"]);
+        }
+    }
+    else if ($_POST["btn"] == "userDelete") {
+        if ($_SESSION["username"] == "administrator") {
+            $user_control->userDelete($_POST["id"]);
+        }
+    }
+
+    header("Refresh:0");
 }
 
 // gets all blog form database
