@@ -20,6 +20,37 @@ class user_control {
     }
 
     /**
+     * deletes a user in the database
+     * 
+     * @param string $user_id the ID of the user
+     */
+    public function userDelete(string $user_id)
+    {
+        $this->db->userDelete($user_id);
+    }
+
+    /**
+     * approves a user in the database
+     * 
+     * @param string $user_id the ID of the user
+     */
+    public function userApprove(string $user_id)
+    {
+        $this->db->userApprove($user_id);
+    }
+
+    /**
+     * get a user in database
+     * 
+     * @return false|array returns false if an error occurred or the return form database is empty,
+     * returns array if database return is one or more items
+     */
+    public function getAllUsers()
+    {
+        return $this->db->getAllUsers();
+    }
+
+    /**
      * control is a function where you tell it what to width the data
      * 
      * @param string $control login or register
@@ -58,7 +89,12 @@ class user_control {
                 $this->addError("passwordLogin", "invalid password");
             }
             else {
-                $_SESSION["username"] = $username;
+                if ($allUsers[$userIndex]["approved"] == 0) {
+                    $this->addError("notApproved", "not approved user");
+                }
+                else {
+                    $_SESSION["username"] = $username;
+                }
             }
         }
     }

@@ -30,6 +30,11 @@
                         <?php } ?>
                     </div>
                     <input type="submit" class="btn btn-primary w-100 my-3" name="submit" value="Login">
+                    <?php if (isset($errors["notApproved"])) { ?>
+                        <div class='mt-2 mx-auto py-1 px-3 bg-danger border rounded text-white w-fit'>
+                            <?= $errors["notApproved"] ?>
+                        </div>
+                    <?php } ?>
                 </form>
                 <!-- form end -->
             </div>

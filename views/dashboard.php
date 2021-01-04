@@ -20,38 +20,57 @@
             </div>
             <!-- approve section -->
             <div class="d-flex flex-row h-25 justify-content-around mt-3 w-100">
-                <!-- approve users -->
-                <div class="card w-40 border-dark">
-                    <div class='card-header d-flex justify-content-around border-dark py-2'>
-                        <p class='m-0'>Not a approved users</p>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">test</p>
-                    </div>
-                </div>
-                <?php if ($Blogs != false && 1 <= count(array_filter(array_column($Blogs, "approved"),"filter"))) { ?>
-                <!-- approve blogs -->
-                <div class="card w-40 border-dark">
-                    <div class='card-header d-flex justify-content-around border-dark py-2'>
-                        <p class='m-0'>Not a approved blogs</p>
-                    </div>
-                    <div class="card-body">
-                        <?php for ($i = 0; $i < count($Blogs); $i++) { if ($Blogs[$i]["approved"] == 0) {?>
-                        <div class="mb-1 border border-dark rounded d-flex justify-content-between">
-                            <!-- blog title and username -->
-                            <p class="m-0 my-auto w-50">title: <?= $Blogs[$i]["title"] ?> by: <?= $Blogs[$i]["username"] ?></p>
-                            <!-- btn section -->
-                            <form method='post' action='<?= $_SERVER['PHP_SELF'] ?>'>
-                                <a href="./blog.php?id=<?= $Blogs[$i]["id"] ?>" class="btn btn-primary"><span class="oi oi-eye"></span></a>
-                                <button type="submit" name='btn' value="approve" class="btn btn-success"><span class="oi oi-check"></span></button>
-                                <button type="submit" name='btn' value="delete" class="btn btn-danger"><span class="oi oi-trash"></span></button>
-
-                                <input type="hidden" name="id" value="<?= $Blogs[$i]["id"] ?>">
-                            </form>
+                <?php if ($allUsers != false && 1 <= count(array_filter(array_column($allUsers, "approved"), "filter"))) { ?>
+                    <!-- approve users -->
+                    <div class="card w-40 border-dark">
+                        <div class='card-header d-flex justify-content-around border-dark py-2'>
+                            <p class='m-0'>Not a approved users</p>
                         </div>
-                        <?php }} ?>
+                        <div class="card-body">
+                            <?php for ($i = 0; $i < count($allUsers); $i++) {
+                                if ($allUsers[$i]["approved"] == 0) { ?>
+
+                                    <div class="mb-1 border border-dark rounded d-flex justify-content-between">
+                                        <!-- username and email -->
+                                        <p class="m-0 my-auto w-50">Username: <?= $allUsers[$i]["username"]?><br> Email: <?= $allUsers[$i]["email"]?></p>
+                                        <!-- btn section -->
+                                        <form class="d-flex w-15" method='post' action='<?= $_SERVER['PHP_SELF'] ?>'>
+                                            <button type="submit" name='btn' value="userApprove" class="w-50 btn btn-success"><span class="oi oi-check"></span></button>
+                                            <button type="submit" name='btn' value="userDelete" class="w-50 btn btn-danger"><span class="oi oi-trash"></span></button>
+
+                                            <input type="hidden" name="id" value="<?= $allUsers[$i]["id"]?>">
+                                        </form>
+                                    </div>
+                            <?php }
+                            } ?>
+                        </div>
                     </div>
-                </div>
+                <?php } ?>
+                <?php if ($Blogs != false && 1 <= count(array_filter(array_column($Blogs, "approved"), "filter"))) { ?>
+                    <!-- approve blogs -->
+                    <div class="card w-40 border-dark">
+                        <div class='card-header d-flex justify-content-around border-dark py-2'>
+                            <p class='m-0'>Not a approved blogs</p>
+                        </div>
+                        <div class="card-body">
+                            <?php for ($i = 0; $i < count($Blogs); $i++) {
+                                if ($Blogs[$i]["approved"] == 0) { ?>
+                                    <div class="mb-1 border border-dark rounded d-flex justify-content-between">
+                                        <!-- blog title and username -->
+                                        <p class="m-0 my-auto w-50">title: <?= $Blogs[$i]["title"] ?> by: <?= $Blogs[$i]["username"] ?></p>
+                                        <!-- btn section -->
+                                        <form method='post' action='<?= $_SERVER['PHP_SELF'] ?>'>
+                                            <a href="./blog.php?id=<?= $Blogs[$i]["id"] ?>" class="btn btn-primary"><span class="oi oi-eye"></span></a>
+                                            <button type="submit" name='btn' value="approve" class="btn btn-success"><span class="oi oi-check"></span></button>
+                                            <button type="submit" name='btn' value="delete" class="btn btn-danger"><span class="oi oi-trash"></span></button>
+
+                                            <input type="hidden" name="id" value="<?= $Blogs[$i]["id"] ?>">
+                                        </form>
+                                    </div>
+                            <?php }
+                            } ?>
+                        </div>
+                    </div>
                 <?php } ?>
             </div>
         </div>

@@ -4,6 +4,26 @@ class db_functions extends db_connection
     // user_control
 
     /**
+     * deletes a user in the database
+     * 
+     * @param string $user_id the ID of the user
+     */
+    public function userDelete(string $user_id)
+    {
+        $this->deleteData("DELETE FROM `login` WHERE `id` = $user_id");
+    }
+
+    /**
+     * approves a user in the database
+     * 
+     * @param string $user_id the ID of the user
+     */
+    public function userApprove(string $user_id)
+    {
+        $this->updateData("UPDATE `login` SET `approved`= 1 WHERE `id` = $user_id");
+    }
+
+    /**
      * gets all users from database id, username, email and password
      * 
      * @return false|array returns false if an error occurred or the return form database is empty,
