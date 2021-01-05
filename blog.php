@@ -22,17 +22,22 @@ if (!isset($_SESSION)) {
 if (isset($_POST["id"]) && !empty($_POST["id"]) && isset($_POST["btn"]) && !empty($_POST["btn"])) {
     $blog = $blog_control->getBlog($_POST["id"]);
 
-    if ($blog["username"] == $_SESSION["username"] || $_SESSION["username"] == "administrator") {
-        if ($_POST["btn"] == "delete") {
+    if ($_POST["btn"] == "delete") {
+        if ($_SESSION["username"] == $blog["username"] || $_SESSION["username"] == "administrator") {
             $blog_control->deleteBlog($_POST["id"]);
-            header("Location: ./index.php");
-        } else if ($_POST["btn"] == "edit" && $blog["username"] == $_SESSION["username"]) {
+        }
+    }
+    else if ($_POST["btn"] == "edit") {
+        if ($_SESSION["username"] == $blog["username"]) {
             header("Location: ./editBlog.php?blog=" . $_POST["id"]);
         }
     }
 }
 // check if ID is set and not empty
-if (!isset($_GET["id"]) && !empty($_GET["id"]) && $blog_control->getBlog($_POST["id"]) != false) header("Location: ./index.php");
+if (isset($_GET["id"]) == false) header("Location: ./index.php"); 
+if (empty($_GET["id"])) header("Location: ./index.php");
+if ($blog_control->getBlog($_GET["id"]) == false) header("Location: ./index.php");
+
 // gets the blog, categories and the comments by the ID
 $blog = $blog_control->getBlog($_GET["id"]);
 $categories = $blog["categories"];

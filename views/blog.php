@@ -3,13 +3,13 @@
         <div class='card-header d-flex border-dark py-2'>
             <div class="w-25 h-100 justify-content-around d-flex">
                 <p class="m-0">by: <?= $blog['username'] ?></p>
-                <p class="m-0">time: <?= date("h:i d/m/Y", strtotime($blog['timestamp'])) ?></p>
+                <p class="m-0">time: <?= $blog['timestamp'] ?></p>
             </div>
             <div class="w-50 text-center">
                 <?= $blog["title"] ?>
             </div>
             <?php if (isset($_SESSION["username"]) && ($_SESSION["username"] == $blog["username"] || $_SESSION["username"] == "administrator")) { ?>
-                <form method='post' action='<?= $_SERVER['PHP_SELF'] ?>' class='w-25 h-100 justify-content-around d-flex'>
+                <form method='post' action='<?= $_SERVER['PHP_SELF'] . "?id=" . $blog["id"]?>' class='w-25 h-100 justify-content-around d-flex'>
                     <?php if ($_SESSION["username"] == $blog["username"]) { ?>
                         <input type='submit' name='btn' class='btn btn-primary' value='edit'>
                     <?php } ?>

@@ -48,14 +48,22 @@
                         </button>
                         <div class="dropdown-menu pl-2" aria-labelledby="dropdownMenuButton">
                             <div class="d-flex">
-                            <?php if ($allCategories != false) for ($i = 0; $i < ceil(count($allCategories) / 5); $i++) { ?>
+                                <?php if ($allCategories != false) for ($i = 0; $i < ceil(count($allCategories) / 5); $i++) { ?>
                                     <div class='mr-2'>
                                         <?php for ($j = 5 * $i; $j < 5 * ($i + 1); $j++) {
                                             if (isset($allCategories[$j])) { ?>
-                                                <div class='category'>
-                                                    <input name='categories[<?= $allCategories[$j] ?>]' value='<?= $allCategories[$j] ?>' <?php if (in_array($allCategories[$j], $blog["categories"])) echo 'checked'?> type='checkbox'>
-                                                    <label><?= $allCategories[$j] ?></label>
-                                                </div>
+
+                                                <?php if ($blog["categories"] != false && in_array($allCategories[$j], $blog["categories"])) { ?>
+                                                    <div class='category'>
+                                                        <input name='categories[<?= $allCategories[$j] ?>]' value='<?= $allCategories[$j] ?>' checked type='checkbox'>
+                                                        <label><?= $allCategories[$j] ?></label>
+                                                    </div>
+                                                <?php } else { ?>
+                                                    <div class='category'>
+                                                        <input name='categories[<?= $allCategories[$j] ?>]' value='<?= $allCategories[$j] ?>' type='checkbox'>
+                                                        <label><?= $allCategories[$j] ?></label>
+                                                    </div>
+                                                <?php } ?>
                                         <?php }
                                         } ?>
                                     </div>

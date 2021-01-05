@@ -20,15 +20,13 @@ if (!isset($_SESSION)) {
 // $blog used in ./views/editBlog
 $blog;
 
-if ($blog_control->getBlog($_GET["blog"]) != false) {
-    $blog = $blog_control->getBlog($_GET["blog"]);
+// if (isset($_GET["blog"]) == false) header("Location: ./index.php"); 
+// if (empty($_GET["blog"])) header("Location: ./index.php");
+// if ($blog_control->getBlog($_GET["blog"]) == false) header("Location: ./index.php");
 
-    if ($_SESSION["username"] != $blog["username"]) {
-        header("Location: ./index.php");
-    }
-} else {
-    header("Location: ./index.php");
-}
+$blog = $blog_control->getBlog($_GET["blog"]);
+
+if ($_SESSION["username"] != $blog["username"]) header("Location: ./index.php");
 
 $allCategories = $db->getAllCategories();
 
