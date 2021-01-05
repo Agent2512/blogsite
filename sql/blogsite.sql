@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Vært: 127.0.0.1
--- Genereringstid: 20. 11 2020 kl. 09:46:39
+-- Genereringstid: 05. 01 2021 kl. 14:50:33
 -- Serverversion: 10.4.11-MariaDB
 -- PHP-version: 7.2.28
 
@@ -35,7 +35,8 @@ CREATE TABLE `blogs` (
   `text` varchar(500) NOT NULL,
   `Image` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `approved` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -130,15 +131,16 @@ CREATE TABLE `login` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL
+  `email` varchar(255) NOT NULL,
+  `approved` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Data dump for tabellen `login`
 --
 
-INSERT INTO `login` (`id`, `username`, `password`, `email`) VALUES
-(1, 'nool', 'nool', 'asd');
+INSERT INTO `login` (`id`, `username`, `password`, `email`, `approved`) VALUES
+(18, 'administrator', '$2y$10$zog4.FfHYR7.cRFRKDSXKuKiJl6bJRx9vKapulceUNzkV7CfWvRiC', 'nikl2207@tietgen.dk', 1);
 
 --
 -- Begrænsninger for dumpede tabeller
@@ -189,13 +191,13 @@ ALTER TABLE `login`
 -- Tilføj AUTO_INCREMENT i tabel `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `blogs_has_categories`
 --
 ALTER TABLE `blogs_has_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `categories`
@@ -207,13 +209,13 @@ ALTER TABLE `categories`
 -- Tilføj AUTO_INCREMENT i tabel `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Begrænsninger for dumpede tabeller
