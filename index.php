@@ -15,9 +15,10 @@ $blogs = $blog_control->getAllBlogs();
 if ($blogs != false) foreach ($blogs as $key => $blog) if ($blog["approved"] == 0) {
     unset($blogs[$key]);
 }
+$categoriesUsed = [];
 if ($blogs != false) {
     $blogs = array_values($blogs);
-    $categoriesUsed = [];
+    
 
     for ($i = 0; $i < count($blogs); $i++) {
         if ($blogs[$i]["categories"] != false) for ($j = 0; $j < count($blogs[$i]["categories"]); $j++) {
