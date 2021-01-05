@@ -173,6 +173,7 @@ class db_functions extends db_connection
             }
             $i++;
         }
+        return $new_file_name . $new_file_extension;
     }
 
     /**
