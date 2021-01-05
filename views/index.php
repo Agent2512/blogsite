@@ -16,7 +16,7 @@
     <?php } ?>
     <?php if ($blogs != false) for ($i = 0; $i < count($blogs); $i++) { ?>
         <!-- card start -->
-        <div class='card mx-2 my-2 w-20'>
+        <div class='card mx-2 my-2 w-20 h-fit'>
             <!-- card img -->
             <img src='./img/uploads/<?= $blogs[$i]["Image"] ?>' class='card-img-top img-fluid'>
             <!-- card title -->
