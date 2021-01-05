@@ -27,14 +27,16 @@
                 <!-- card btn to card main page -->
                 <a href='./blog.php?id=<?= $blogs[$i]["id"] ?>' class='btn btn-primary w-100'>Go to blog</a>
             </div>
+            <?php if ($blogs[$i]["categories"] != false) { ?>
             <div class='card-body border-top'>
                 <!-- card category list -->
-                <?php if ($blogs[$i]["categories"] != false) for ($j = 0; $j < count($blogs[$i]["categories"]); $j++) { ?>
+                <?php for ($j = 0; $j < count($blogs[$i]["categories"]); $j++) { ?>
                     <div class='d-inline-flex flex-wrap border rounded p-1'>
                         <p class='m-0'><?= $blogs[$i]["categories"][$j] ?></p>
                     </div>
                 <?php } ?>
             </div>
+            <?php } ?>
             <div class='card-footer text-muted'>
                 <!-- card creator -->
                 <p class='card-text'>by: <?= $blogs[$i]["username"] ?></p>

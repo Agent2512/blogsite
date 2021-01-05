@@ -3,7 +3,7 @@
         <div class='card mx-2 my-2 p-3 w-100 h-fit border-dark d-flex flex-row justify-content-between flex-wrap'>
             <div class="w-75 d-flex flex-row flex-wrap">
                 <?php foreach ($arrayOutput as $key => $value) { ?>
-                    <div class="border border-dark rounded d-flex m-1">
+                    <div class="border border-dark rounded d-flex m-1 h-fit">
                         <p class="m-0 p-1 border-dark border-right"><?= $key ?></p>
                         <p class="m-0 p-1"><?= $value ?></p>
                     </div>
@@ -32,13 +32,13 @@
 
                                     <div class="mb-1 border border-dark rounded d-flex justify-content-between">
                                         <!-- username and email -->
-                                        <p class="m-0 my-auto w-50">Username: <?= $allUsers[$i]["username"]?><br> Email: <?= $allUsers[$i]["email"]?></p>
+                                        <p class="m-0 my-auto w-50">Username: <?= $allUsers[$i]["username"] ?><br> Email: <?= $allUsers[$i]["email"] ?></p>
                                         <!-- btn section -->
                                         <form class="d-flex w-15" method='post' action='<?= $_SERVER['PHP_SELF'] ?>'>
                                             <button type="submit" name='btn' value="userApprove" class="w-50 btn btn-success"><span class="oi oi-check"></span></button>
                                             <button type="submit" name='btn' value="userDelete" class="w-50 btn btn-danger"><span class="oi oi-trash"></span></button>
 
-                                            <input type="hidden" name="id" value="<?= $allUsers[$i]["id"]?>">
+                                            <input type="hidden" name="id" value="<?= $allUsers[$i]["id"] ?>">
                                         </form>
                                     </div>
                             <?php }
@@ -77,14 +77,14 @@
     <?php } ?>
 
     <?php if ($Blogs != false) for ($i = 0; $i < count($Blogs); $i++) { ?>
-        <div class='card mx-2 my-2 w-100 h-75 h-fit border-dark'>
+        <div data-css="<?php if ($Blogs[$i]["commentsCount"] == false) echo("h-40")?>" class='card mx-2 my-2 w-100 h-75 h-fit border-dark'>
             <div class='card-header d-flex justify-content-around border-dark py-2 blog'>
                 <p class='m-0'><?= $Blogs[$i]["title"] ?></p>
             </div>
             <div class='card-body p-0 d-none'>
                 <div class='w-100 h-100'>
                     <!-- content -->
-                    <div class='h-50 w-100 border-bottom border-dark d-flex'>
+                    <div class='h-50 w-100 border-bottom border-dark d-flex <?php if ($Blogs[$i]["commentsCount"] == false) echo("h-100")?>'>
                         <!-- info and actions -->
                         <div class='col p-0 h-100 d-flex align-items-center'>
                             <!-- image for the blog -->
@@ -126,20 +126,22 @@
                             </form>
                         </div>
                     </div>
-                    <div class='h-50 w-100 border-top border-dark d-flex flex-column justify-content-between'>
-                        <!-- comments -->
-                        <div class='w-100 h-fit border-bottom border-dark'>
-                            <p class='card-text text-center'>4 newest comments</p>
+                    <?php if ($Blogs[$i]["commentsCount"] >= 1) { ?>
+                        <div class='h-50 w-100 border-top border-dark d-flex flex-column justify-content-between'>
+                            <!-- comments -->
+                            <div class='w-100 h-fit border-bottom border-dark'>
+                                <p class='card-text text-center'>4 newest comments</p>
+                            </div>
+                            <?php for ($j = $Blogs[$i]["commentsCount"] - 4; $j < $Blogs[$i]["commentsCount"]; $j++) {
+                                if (isset($Blogs[$i]["comments"][$j])) { ?>
+                                    <div class='w-100 h-100 border-top border-dark p-2 d-flex flex-column justify-content-between'>
+                                        <p class='m-0'><?= $Blogs[$i]["comments"][$j]["text"] ?></p>
+                                        <p class='m-0 text-right'>by: <?= $Blogs[$i]["comments"][$j]["username"] ?></p>
+                                    </div>
+                            <?php }
+                            } ?>
                         </div>
-                        <?php for ($j = $Blogs[$i]["commentsCount"] - 4; $j < $Blogs[$i]["commentsCount"]; $j++) {
-                            if (isset($Blogs[$i]["comments"][$j])) { ?>
-                                <div class='w-100 h-100 border-top border-dark p-2 d-flex flex-column justify-content-between'>
-                                    <p class='m-0'><?= $Blogs[$i]["comments"][$j]["text"] ?></p>
-                                    <p class='m-0 text-right'>by: <?= $Blogs[$i]["comments"][$j]["username"] ?></p>
-                                </div>
-                        <?php }
-                        } ?>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
