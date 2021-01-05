@@ -481,7 +481,7 @@ class db_functions extends db_connection
         $text = $post_data["text"];
         $categories = $post_data["categories"] ?? [];
 
-        $image = $this->getAvailableImageName($image_data["image"]);
+        $image = $this->getAvailableImageName($image_data);
 
         $x = $this->updateData("
         UPDATE `blogs` 
