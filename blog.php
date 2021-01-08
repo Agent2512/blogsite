@@ -18,15 +18,21 @@ if (!isset($_SESSION)) {
 /**
  * takes $_POST data 
  * checks if [id] and [btn] is set and not empty
+ * and then uses [btn] to start command
+ * 
  */
 if (isset($_POST["id"]) && !empty($_POST["id"]) && isset($_POST["btn"]) && !empty($_POST["btn"])) {
+    // gets blog of ref
     $blog = $blog_control->getBlog($_POST["id"]);
 
+    // delete command
     if ($_POST["btn"] == "delete") {
+        // permission check
         if ($_SESSION["username"] == $blog["username"] || $_SESSION["username"] == "administrator") {
             $blog_control->deleteBlog($_POST["id"]);
         }
     }
+    // edit command  permission
     else if ($_POST["btn"] == "edit") {
         if ($_SESSION["username"] == $blog["username"]) {
             header("Location: ./editBlog.php?blog=" . $_POST["id"]);
