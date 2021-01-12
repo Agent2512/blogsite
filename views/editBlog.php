@@ -1,9 +1,11 @@
 <div class="container-fluid w-100 h-90 d-flex">
-    <!-- card1 start -->
+    <!-- card main start -->
     <div class="card m-2 w-75">
         <!-- card title -->
         <div class="card-header">create blog</div>
+        <!-- main content start -->
         <div class="card-body">
+            <!-- form start -->
             <form class="h-100" action="<?= $_SERVER['PHP_SELF'] . "?blog=" . $_GET["blog"]; ?>" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Title (max 50 characters)</label>
@@ -74,11 +76,13 @@
                 </div>
                 <input type="submit" class="btn btn-primary w-100" name="submit" value="submitBlog">
             </form>
+            <!-- form end -->
         </div>
+        <!-- main content end -->
     </div>
-    <!-- card1 end -->
+    <!-- card main end -->
 
-    <!-- card2 start -->
+    <!-- card template start -->
     <div class="card m-2 w-20 h-fit">
         <!-- card title -->
         <div class="card-header">template blog</div>
@@ -106,5 +110,5 @@
             <p class="card-text">Timestamp</p>
         </div>
     </div>
-    <!-- card2 end -->
+    <!-- card template end -->
 </div>
