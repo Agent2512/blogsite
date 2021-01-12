@@ -19,7 +19,7 @@ $allUsers = $user_control->getAllUsers();
 if (!isset($_SESSION)) {
     session_start();
 }
-
+// filter for approved
 function filter($var)
 {
     return($var == 0);

@@ -76,74 +76,114 @@
         </div>
     <?php } ?>
 
-    <?php if ($Blogs != false) for ($i = 0; $i < count($Blogs); $i++) { ?>
-        <div data-css="<?php if ($Blogs[$i]["commentsCount"] == false) echo("h-40")?>" class='card mx-2 my-2 w-100 h-75 h-fit border-dark'>
+    <?php // prints out all blogs blogs that are approved and filtered
+    if ($Blogs != false) for ($i = 0; $i < count($Blogs); $i++) { ?>
+        <!-- blog box start -->
+        <div data-css="<?php if ($Blogs[$i]["commentsCount"] == false) echo ("h-40") ?>" class='card mx-2 my-2 w-100 h-75 h-fit border-dark'>
+            <!-- title box start -->
             <div class='card-header d-flex justify-content-around border-dark py-2 blog'>
+                <!-- title -->
                 <p class='m-0'><?= $Blogs[$i]["title"] ?></p>
             </div>
+            <!-- title box end -->
+            <!-- outside container start -->
             <div class='card-body p-0 d-none'>
                 <div class='w-100 h-100'>
                     <!-- content -->
-                    <div class='h-50 w-100 border-bottom border-dark d-flex <?php if ($Blogs[$i]["commentsCount"] == false) echo("h-100")?>'>
-                        <!-- info and actions -->
+                    <div class='h-50 w-100 border-bottom border-dark d-flex <?php if ($Blogs[$i]["commentsCount"] == false) echo ("h-100") ?>'>
+                        <!-- image box start -->
                         <div class='col p-0 h-100 d-flex align-items-center'>
                             <!-- image for the blog -->
                             <img src='./img/uploads/<?= $Blogs[$i]["Image"] ?>' class='img-fluid h-100' alt=''>
                         </div>
+                        <!-- image box end -->
+                        <!-- center-info box start -->
                         <div class='col p-0 h-100 d-flex flex-column'>
+                            <!-- username box start -->
                             <div class='h-fit w-75 border border-dark rounded m-auto d-flex justify-content-center flex-column'>
                                 <!-- username to blog -->
                                 <p class='card-text text-center h3'><?= $Blogs[$i]["username"] ?></p>
-
                             </div>
+                            <!-- username box end -->
+                            <!-- timestamp box start -->
                             <div class='h-fit w-75 border border-dark rounded m-auto d-flex justify-content-center flex-column'>
                                 <!-- date for the blog create -->
                                 <p class='card-text text-center mb-0'>date</p>
                                 <p class='card-text text-center h3'><?= date("h:i d/m/Y", strtotime($Blogs[$i]["timestamp"])) ?></p>
                             </div>
+                            <!-- timestamp box end -->
+                            <!-- commentsCount box start -->
                             <div class='h-25 w-75 border border-dark rounded m-auto d-flex justify-content-center flex-column'>
                                 <!-- how many comments on blog -->
                                 <p class='card-text text-center mb-0'>count off comments</p>
                                 <p class='card-text text-center h3'><?= $Blogs[$i]["commentsCount"] ?></p>
                             </div>
+                            <!-- commentsCount box end -->
+                            <!-- approve box start -->
                             <div class='h-fit w-75 border border-dark rounded m-auto d-flex justify-content-center flex-column <?php if ($Blogs[$i]["approved"] == 0) echo "bg-danger";
                                                                                                                                 else echo "bg-success"; ?>'>
                                 <!-- approved to blog -->
                                 <p class='card-text text-center h3'>Approved</p>
-
                             </div>
+                            <!-- approve box end -->
                         </div>
+                        <!-- center-info box end -->
+                        <!-- tool box start -->
                         <div class='col p-0 h-100'>
+                            <!-- tool wrapper start -->
                             <form method='post' action='<?= $_SERVER['PHP_SELF'] ?>' class='w-100 h-100 d-flex flex-column justify-content-around'>
+                                <!-- goto blog btn start -->
                                 <a href="./blog.php?id=<?= $Blogs[$i]["id"] ?>" class='btn btn-primary d-flex flex-column h-25 justify-content-center m-auto w-75'>
                                     <p class='m-0'>Go to blog</p>
                                 </a>
-                                <?php if ($Blogs[$i]["username"] == $_SESSION["username"]) { ?>
+                                <!-- goto blog btn end -->
+                                <?php // tools if have permission 
+                                if ($Blogs[$i]["username"] == $_SESSION["username"]) { ?>
+                                    <!-- edit blog start -->
                                     <input type='submit' class='btn m-auto w-75 h-25 btn-primary' name='btn' value='edit'>
+                                    <!-- edit blog end -->
                                 <?php } ?>
+                                <!-- submit blog start -->
                                 <input type='submit' class='btn m-auto w-75 h-25 btn-danger' name='btn' value='delete'>
+                                <!-- submit blog end -->
+                                <!-- id of blog -->
                                 <input type='hidden' name='id' value='<?= $Blogs[$i]["id"] ?>'>
                             </form>
+                            <!-- tool wrapper end -->
                         </div>
+                        <!-- tool box end -->
                     </div>
-                    <?php if ($Blogs[$i]["commentsCount"] >= 1) { ?>
+                    <?php
+                    if // run if there is a comment to blog 
+                    ($Blogs[$i]["commentsCount"] >= 1) { ?>
+                        <!-- comment box start -->
                         <div class='h-50 w-100 border-top border-dark d-flex flex-column justify-content-between'>
-                            <!-- comments -->
+                            <!-- comments box title start -->
                             <div class='w-100 h-fit border-bottom border-dark'>
+                            <!-- title -->
                                 <p class='card-text text-center'>4 newest comments</p>
                             </div>
-                            <?php for ($j = $Blogs[$i]["commentsCount"] - 4; $j < $Blogs[$i]["commentsCount"]; $j++) {
+                            <!-- comments box title end -->
+                            <?php // print the 4 newest comments
+                            for ($j = $Blogs[$i]["commentsCount"] - 4; $j < $Blogs[$i]["commentsCount"]; $j++) {
                                 if (isset($Blogs[$i]["comments"][$j])) { ?>
+                                    <!-- comment box start -->
                                     <div class='w-100 h-100 border-top border-dark p-2 d-flex flex-column justify-content-between'>
+                                        <!-- comment text -->
                                         <p class='m-0'><?= $Blogs[$i]["comments"][$j]["text"] ?></p>
+                                        <!-- username to comment -->
                                         <p class='m-0 text-right'>by: <?= $Blogs[$i]["comments"][$j]["username"] ?></p>
                                     </div>
+                                    <!-- comment box end -->
                             <?php }
                             } ?>
                         </div>
+                        <!-- comment box end -->
                     <?php } ?>
                 </div>
             </div>
+            <!-- outside container end -->
         </div>
+        <!-- blog box end -->
     <?php } ?>
 </div>
